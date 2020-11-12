@@ -1,0 +1,227 @@
+@import "~bootstrap";
+@import '~@fortawesome/fontawesome-free/css/all.css';
+
+/* Général */
+
+.button_return, .button_edit, .button_supp, .button_return_index, .button_creerArticles {
+	height: 40px;
+	width: 40px;
+}
+
+.button_edit, .button_supp_event, .button_creer {
+	float: right;
+}
+
+.button_return_index {
+	float: left;
+}
+
+.button_filtre {
+	margin-left: 80px;
+}
+
+.button_adherent_index, .button_atelier_index {
+	height: 25px;
+	width: 25px;
+}
+
+/* background */
+
+.content {
+	min-height: 600px;
+}
+body {
+  background: url(../images/SiteIgny.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+  position: relative;
+}
+body .main-content .side {
+}
+.jumbotron {
+	background-color: white;
+}
+
+/* logo header */
+.logo {
+    margin-top: 20px;
+}
+
+.nav-item {
+	margin-right: 35px;
+	margin-left: 35px;
+}
+
+/* FOOTER */
+
+.footer {
+
+	background: #303036;
+	color: #d3d3d3;
+	height: 160px;
+	/* pour un sticky bottom ajouter*/
+	/* position: relative;*/
+	margin-top: 30px;
+}
+
+.footer .footer-content {
+	width: 100%;
+	height: 160px;
+	display: flex;
+
+}
+
+.footer .footer-content .footer-section {
+	flex: 1;
+	padding: 15px;
+}
+
+.footer .footer-content h3 {
+	color: white;
+
+}
+
+.footer .footer-content .about .contact span {
+	display: block;
+	font-size: .8em;
+	margin-bottom: 10px;
+}
+
+.footer .footer-content .about .socials a {
+	border: 1px solid white;
+	color: #fff;
+	width: 30px;
+	height: 26px;
+	padding-top: 5px;
+	margin-right: 5px;
+	text-align: center;
+	display: inline-block;
+	font-size: 1.0em;
+	border-radius: 5px;
+}
+
+.footer .footer-content .about .socials a:hover {
+	border: 1px solid #047D1F;
+	color: #047D1F;
+	transition: all .3s;
+}
+
+.footer .footer-content .links .liens ul a {
+	text-decoration: none;
+	outline: none;
+	color: #fff;
+	display: block;
+	font-size: .8em;
+
+}
+
+.footer .footer-content .links .liens ul a:hover {
+	color: #047D1F;
+	margin-left: 15px;
+	transition: all .3s;
+}
+
+.footer .footer-content .place .lieux span {
+	display: block;
+	font-size: 1.0em;
+	margin-bottom: 10px;
+}
+
+.footer .footer-bottom {
+	background: #343a40;
+	color: #686868;
+	height: 20px;
+	width: 100%;
+	text-align: center;
+	/*pour un stichy bottom ajouter */
+	bottom: 0px;
+	left: 0px;
+	padding-top: 20px;
+}
+
+.borders {
+	height: 2px;
+	width: 40px;
+  background: #047D1F;
+}
+
+/* accueil */
+.accueil {
+	margin-top: 40px;
+}
+
+.news {
+	padding-left: 0.2%;
+	padding-right: 0.2%;
+}
+
+.carousel{
+	height: 500px;
+	padding: 10px;
+}
+
+.evenements .new_article{
+	padding-left: 10px;
+	padding-right: 10px;
+	height: 500px;
+	overflow-y: scroll;
+}
+
+.card {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.card-text {
+	font-size: small;
+}
+/* Formulaire
+ */
+
+.form-control:focus {
+	border: #047D1F;
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(0, 255, 0, 0.6);
+}
+.formulaire h1 {
+	text-align: center;
+	color: #047D1F;
+}
+
+.button_Formulaire{
+	text-align: center;
+}
+
+/* Page calendrier */
+
+.button_creerEvent {
+	text-align: center;
+}
+
+/* Calendrier
+*/
+
+#calendar_title {
+	color: #047D1F;
+}
+
+/* Page liste de diffusion de mails
+*/
+
+.adherentListeDiffusionHauteurLigne{
+	height: 25px;
+}
+
+/* Page association/partenaires
+*/
+
+.button_edit_miniature, .button_supp_miniature{
+	height: 25px;
+	width: 25px;
+	margin: auto;
+}
+
+.titreLast {
+	background-color: #cc2020;
+}

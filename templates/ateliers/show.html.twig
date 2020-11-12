@@ -1,0 +1,120 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ atelier.nom }}{% endblock %}
+
+{% block content %}
+
+    <div class="formulaire mr-4 ml-4">
+        <div class="card border-danger mb-4 mt-3" >
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-4">
+                        <a href="{{ path('event_calendar') }}">
+                            <img src="{{ asset('/build/images/return.svg') }}" class="button_return mt-3 ml-4"  alt="Retour"
+                                 width="50px" height="50px">
+                        </a>
+                    </div>
+                    <div class="col-4">
+                        <h1 class="mt-2"> {{atelier.nom}} </h1>
+                    </div>
+
+                        <div class="col-4">
+                            {% if is_granted('ROLE_REFERENT') %}
+                                <a href="{{ path('ateliers_edit', {'id': atelier.id}) }}">
+                                    <img src="{{ asset('/build/images/edit.svg') }}" class="button_edit mt-3 mr-4"  alt="Retour">
+                                </a>
+                            {{ include('ateliers/_delete_form.html.twig') }}
+                            {% endif %}
+                            <a href="{{ path('ateliers_index') }}">
+                                <img src="{{ asset('/build/images/list.svg') }}" class="button_edit mt-3 mr-4"  alt="Liste des ateliers"
+                                     width="50px" height="50px">
+                            </a>
+                        </div>
+
+                </div>
+
+            </div>
+            <div class="card-body">
+                <table class="table">
+
+                    <tr>
+                        <th>Début de l'atelier</th>
+                        <td>{{ atelier.dateDebut |format_datetime( locale='fr') }}</td>
+                    </tr>
+                    <tr>
+                        <th>Fin de l'atelier</th>
+                        <td>{{ atelier.dateFin |format_datetime(locale='fr') }}</td>
+                    </tr>
+                    <tr>
+                        <th>Tâches à réalisées</th>
+                        {% if not atelier.taches is empty %}
+                            {% for atelier in atelier.taches %}
+                                <td class="row m-0 ">{{ atelier.nom }} </td>
+                            {% endfor %}
+                        {%  else %}
+                            <td>Non précisé</td>
+                        {% endif %}
+                    </tr>
+                    <tr>
+                        <th>Activité rattachée</th>
+                        <td>{{ atelier.activite.nom }}</td>
+                    </tr>
+                    {% if is_granted('ROLE_REFERENT') %}
+                        <tr>
+                            <th>Nombre d'heures de gestion de l'atelier</th>
+                            <td>{{ atelier.heuresGestionAtelier }}</td>
+                        </tr>
+                    {% endif %}
+                    <tr>
+                        <th>Description de l'atelier</th>
+                        <td>{{ atelier.description }}</td>
+                    </tr>
+                    <tr>
+                        <th> Référent(s)</th>
+                        {% if not atelier.referents is empty %}
+                            {% for atelier in atelier.referents %}
+                                <td class="row m-0 ">{{ atelier.adherent.prenom }} </td>
+                            {% endfor %}
+                        {%  else %}
+                            <td>Non précisé</td>
+                        {% endif %}
+                    </tr>
+
+                    <tr>
+                        <th> Participant(s)</th>
+                        {% if not atelier.adherents is empty %}
+                            {% for adherent in atelier.adherents %}
+                                <td class="row m-0 ">{{ adherent.prenom }} {{ adherent.nom }}</td>
+                            {% endfor %}
+                            {% if is_granted('ROLE_REFERENT') %}
+                                <a href="{{ path('ateliers_participants_excel', {'id': atelier.id}) }}" class="btn btn-success mt-2 mb-3">Faire un export Excel des participants</a>
+                            {% endif %}
+
+                        {% else %}
+                            <td>Non précisé</td>
+                        {% endif %}
+
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="row justify-content-around">
+                        {% if is_granted('ROLE_ADHERENT') %}
+                            {{ form_start(atelierIns) }}
+                            <div class="button_Formulaire">
+                                <button type="submit" class="btn btn-outline-success mb-4 mt-3 ">M'inscrire</button>
+                            </div>
+                            {{ form_end(atelierIns) }}
+
+                            {{ form_start(atelierDesins) }}
+                            <div class="button_Formulaire">
+                                <button type="submit" class="btn btn-outline-danger mb-4 mt-3 ">Me désinscrire</button>
+                            </div>
+                            {{ form_end(atelierDesins) }}
+                        {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+

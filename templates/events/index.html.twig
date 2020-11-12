@@ -1,0 +1,112 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des évènements{% endblock %}
+
+{% block content %}
+        <div class="container-fluid">
+            <div class="col-6">
+                <a href="{{ path('event_calendar') }}"  class="btn btn-outline-success mb-3 mt-4" >Revenir au calendrier</a>
+            </div>
+            <div class="col-10">
+            {% if is_granted('ROLE_ADMIN') %}
+                <h1 class="mt-2"> Liste des évènements <a href="{{ path('events_new') }}"  class="btn btn-success mb-3 mt-3 mr-5 button_creer" id="button_creerAtelier">Créer nouvel évènement</a> </h1>
+            {% else %}
+            <h1 class="mt-2"> Liste des évènements </h1>
+            {% endif %}
+            </div>
+            <table class="table table-responsive">
+                <div class ="row align-items-center">
+                    <thead>
+                        <tr>
+                            <th>Code</th>
+                            <th>Intitulé</th>
+                            <th>Date de début</th>
+                            <th>Date de fin</th>
+                            <th>Prix</th>
+                            <th>Organisateur</th>
+                            <th>actions</th>
+                        </tr>
+                    </thead>
+                </div>
+
+                <tbody>
+                    {% for event in events %}
+                        <tr>
+                            <td>{{ event.id }}</td>
+                            <td>{{ event.nom }}</td>
+                            <td>{{ event.dateDebut |format_datetime(locale='fr') }}</td>
+                            <td>{{ event.dateFin |format_datetime(locale='fr') }}</td>
+                            <td>{{ event.prix }}</td>
+                            {% if not event.admins is empty %}
+                                {% for event in event.admins %}
+                                    <td class="row m-0 ">{{ event.adherent.prenom }}</td>
+                                {% endfor %}
+                            {%  else %}
+                                <td>Non précisé</td>
+                            {% endif %}
+
+
+                            <td>
+                                {% if is_granted('ROLE_ADMIN') %}
+                                <form method="post" action="{{ path('events_delete', {'id': event.id}) }}" onsubmit="return confirm('Etes-vous sûr de vouloir supprimer cet atelier ?');">
+                                    <a href="{{ path('events_show', {'id': event.id}) }}" class="btn btn-outline-success btn-sm mr-2">Voir plus</a>
+
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ event.id) }}">
+                                    <button class="btn btn-sm" >
+                                        <img src="{{ asset('/build/images/supprimer.svg') }}" class="button_atelier_index"  alt="Supprimer">
+                                    </button>
+                                    {% if event.heuresGestionEvent == 0 %}
+                                        <a href="{{ path('events_edit', {'id': event.id}) }}">
+                                            <img src="{{ asset('/build/images/edit.svg') }}" class="button_atelier_index ml-1 "  alt="Modifier">
+                                        </a>
+                                        <a href="{{ path('events_validate', {'id': event.id}) }}">
+                                            <img src="{{ asset('/build/images/validate.svg') }}" class="button_atelier_index ml-1 "  alt="Valider">
+                                        </a>
+                                    {%  endif %}
+                                </form>
+                                {% endif%}
+
+                                {% if not is_granted('ROLE_REFERENT') %}
+                                    <a href="{{ path('events_show', {'id': event.id}) }}" class="btn btn-outline-success btn-sm mr-2">Voir plus</a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="7">Pas d'évènements à afficher</td>
+                            </tr>
+                    {% endfor %}
+                </tbody>
+
+            </table>
+    </div>
+
+{% endblock %}
+
+{% block leftside %}
+    <div class="filters card text-black bg-light"> <!--pour la bordure du conteneur-->
+        <div class="card-header">Filtrer par </div>
+        <div class="card-body">
+            <span class="badge badge-dark ml-4 mb-4">Annee :</span>
+            <div class="form-check">
+                {{ form_start(form) }}
+
+                {{ form_widget(form.date  ,{'attr': {
+                    'placeholder': "Veuillez entrer une année",
+                    'class': "mb-4"}}  )}}
+
+                <span class="badge badge-dark  mb-4">Nom :</span>
+
+                {{ form_widget(form.nom  ,{'attr': {
+                    'class': "mb-2"}}  )}}
+
+                <div class="button_Formulaire">
+                    <button type="submit" class="btn btn-success mt-3 mr-3">Filtrer</button>
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

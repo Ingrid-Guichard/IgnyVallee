@@ -1,0 +1,124 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Arbres{% endblock %}
+
+{% block content %}
+
+    <div class="container-fluid">
+        {% if is_granted('ROLE_REFERENT') %}
+            <h1 class="mt-2"> Liste des arbres
+                <a href="{{ path('arbres_new') }}"  class="btn btn-success mb-3 mt-3 button_creer" >Ajouter nouvel arbre</a>
+                <a href="{{ path('arbres_index_excel') }}" class="btn btn-success mb-3 mt-3">Faire un export Excel</a>
+            </h1>
+        {% else %}
+            <h1 class="mt-2"> Liste des arbres
+                <a href="{{ path('arbres_index_excel') }}" class="btn btn-success mb-3 mt-3">Faire un export Excel</a>
+
+            </h1>
+        {% endif %}
+        <table class="table table-responsive">
+            <div class ="row align-items-center">
+                <thead>
+                <tr>
+                    <th class="text-center">Numéro de l'arbre</th>
+                    <th class="text-center">Nom du fruit</th>
+                    <th class="text-center">Parrain</th>
+                    <th class="text-center">Etat de l'arbre</th>
+                    <th class="text-center">Age de l'arbre</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            </div>
+            <tbody>
+            {% for arbre in arbres %}
+                <tr>
+                    <td>{{ arbre.numeroArbre }}</td>
+                    <td>{{ arbre.nomFruitArbre }}</td>
+
+                    {% if not arbre.adherent is empty %}
+                        <td class="row m-0 ">{{ arbre.adherent.prenom }} {{ arbre.adherent.nom }}</td>
+                    {%  else %}
+                        <td>Libre</td>
+                    {% endif %}
+
+                    {% if not arbre.EtatArbre is empty %}
+                        <td>{{ arbre.EtatArbre }}</td>
+                    {%  else %}
+                        <td>Pas d'informations</td>
+                    {% endif %}
+
+                    {% if not arbre.ageArbre is empty %}
+                        <td>{{ arbre.ageArbre }}</td>
+                    {%  else %}
+                        <td>Pas d'informations</td>
+                    {% endif %}
+
+                    <td>
+                    {% if 'parrainer' in app.request.uri %}
+                      <a href="{{ path('arbres_valide_parrainer', {'id': arbre.id}) }}" class="btn btn-outline-success btn-sm mr-2">Examiner Demande</a>
+                    {% else %}
+                      {% if is_granted('ROLE_REFERENT') %}
+                          <form method="post" action="{{ path('arbres_delete', {'id': arbre.id}) }}" onsubmit="return confirm('Etes-vous sûr de vouloir supprimer cet arbre ?');">
+                              <a href="{{ path('arbres_show', {'id': arbre.id}) }}" class="btn btn-outline-success btn-sm mr-2">Voir plus</a>
+
+                              <input type="hidden" name="_method" value="DELETE">
+                              <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ arbre.id) }}">
+                              <button class="btn btn-sm" >
+                                  <img src="{{ asset('/build/images/supprimer.svg') }}" class="button_atelier_index"  alt="Supprimer">
+                              </button>
+                              <a href="{{ path('arbres_edit', {'id': arbre.id}) }}">
+                                  <img src="{{ asset('/build/images/edit.svg') }}" class="button_atelier_index ml-1 "  alt="Modifier">
+                              </a>
+                          </form>
+                      {% endif %}
+
+                      {% if not is_granted('ROLE_REFERENT') %}
+                          <a href="{{ path('arbres_show', {'id': arbre.id}) }}" class="btn btn-outline-success btn-sm mr-2">Voir plus</a>
+                          {% if app.user == arbre.adherent and arbre.parrainageValide == true %}
+                              <a href="{{ path('arbres_edit', {'id': arbre.id}) }}">
+                                  <img src="{{ asset('/build/images/edit.svg') }}" class="button_atelier_index ml-1 "  alt="Modifier">
+                              </a>
+                          {% endif %}
+                      {% endif %}
+                    {% endif %}
+
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="7">Pas d'arbres enregistrer</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+
+{% block leftside %}
+  {% if 'parrainer' not in app.request.uri %}
+    <div class="filters card text-black bg-light mt-0"> <!--pour la bordure du conteneur-->
+        <div class="card-header">Filtrer par </div>
+        <div class="card-body">
+            <div class="form-check">
+                {{ form_start(form) }}
+
+                <span class="badge badge-dark  mb-4">Numéro :</span>
+
+                {{ form_widget(form.num  ,{'attr': {
+                    'class': "mb-2"}}  )}}
+
+                <span class="badge badge-dark  mb-3 mt-4"> Autres :</span>
+
+                {{ form_widget(form.adherent  ,{'attr': {
+                    'class': "mb-2"}}  )}}
+
+                <div class="button_Formulaire">
+                    <button type="submit" class="btn btn-success mb-4 mt-3">Filtrer</button>
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+  {% endif %}
+
+{% endblock %}

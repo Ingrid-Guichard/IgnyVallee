@@ -1,0 +1,101 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ruch.nomRuche }}{% endblock %}
+
+{% block content %}
+
+<div class="formulaire mr-4 ml-4">
+    <div class="card border-danger mb-4 mt-3" >
+        <div class="card-header">
+            <div class="row">
+                <div class="col-4">
+                    <a href="{{ path('ruches_index') }}">
+                        <img src="{{ asset('/build/images/return.svg') }}" class="button_return mt-3 ml-4"  alt="Retour"
+                             width="50px" height="50px">
+                    </a>
+                </div>
+                <div class="col-4">
+                    <h1 class="mt-2"> {{ruch.nomRuche}} </h1>
+                </div>
+
+                <div class="col-4">
+                    {% if is_granted('ROLE_REFERENT') %}
+                        <a href="{{ path('ruches_edit', {'id': ruch.id}) }}">
+                            <img src="{{ asset('/build/images/edit.svg') }}" class="button_edit mt-3 mr-4"  alt="Retour">
+                        </a>
+                        {{ include('ruches/_delete_form.html.twig') }}
+                    {% endif %}
+                    <a href="{{ path('ruches_index') }}">
+                        <img src="{{ asset('/build/images/list.svg') }}" class="button_edit mt-3 mr-4"  alt="Liste des ateliers"
+                             width="50px" height="50px">
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th>Nom de la ruche</th>
+                        <td>{{ ruch.nomRuche }}</td>
+                    </tr>
+                    <tr>
+                        <th> Rucher </th>
+                        <td>{{ ruch.rucher.nomRucher }}</td>
+                    </tr>
+                    <tr>
+                        <th>Modele de la ruche</th>
+                        <td>{{ ruch.modeleRuche }}</td>
+                    </tr>
+                    <tr>
+                        <th>Plancher de la ruche</th>
+                        <td>{{ ruch.plancherRuche }}</td>
+                    </tr>
+                    <tr>
+                        <th>Emplacement de la ruche</th>
+                        <td>{{ ruch.emplacementRuche }}</td>
+                    </tr>
+                    <tr>
+                        <th>Couvre cadre de la ruche</th>
+                        <td>{{ ruch.couvreCadreRuche }}</td>
+                    </tr>
+                    <tr>
+                        <th>Toit de la ruche</th>
+                        <td>{{ ruch.toitRuche }}</td>
+                    </tr>
+                    <tr>
+                        <th>Date d'installation de la ruche</th>
+                        <td>{{ ruch.dateInstallationRuche ? ruch.dateInstallationRuche|date('Y-m-d') : '' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Origine de la colonie</th>
+                        <td>{{ ruch.origineColonie }}</td>
+                    </tr>
+                    <tr>
+                        <th>Date d'installation de la colonie</th>
+                        <td>{{ ruch.dateInstallationColonie ? ruch.dateInstallationColonie|date('Y-m-d') : '' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Espece de la colonie</th>
+                        <td>{{ ruch.especeColonie }}</td>
+                    </tr>
+                    <tr>
+                        <th>Naissance de la reine</th>
+                        <td>{{ ruch.naissanceReine ? ruch.naissanceReine|date('Y-m-d') : '' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Nourrisseurs</th>
+                        <td>{{ ruch.nourrisseurs }}</td>
+                    </tr>
+                    <tr>
+                        <th>Muselieres</th>
+                        <td>{{ ruch.muselieres ? 'Oui' : 'Non' }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

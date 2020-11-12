@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body_id 'user_edit' %}
+
+{% block content %}
+
+    <!-- Rappel cotisations -->
+    {% if app.user %}
+        {% if cotis %}
+            <div class="alert alert-success" role="alert" style="text-align: center">
+                Vous êtes à jour de votre cotisation {{ annee }}.
+            </div>
+        {% else %}
+            <div class="alert alert-danger" role="alert" style="text-align: center">
+                Vous n'avez pas réglé votre cotisation {{ annee }}. Vous pouvez <a href="#" class="alert-link">régler la
+                    cotisation maintenant.</a>
+            </div>
+        {% endif %}
+    {% endif %}
+
+    <h1>Modifier les informations personnelles</h1>
+
+    <div class="card-body text-danger">
+
+        {{ include('adherents/_form.html.twig') }}
+
+    </div>
+{% endblock %}
+
+{% block rightside %}
+    <div class="section">
+        <a href="{{ path('user_change_password') }}" class="btn btn-lg btn-block btn-danger">
+            <i class="fa fa-lock" aria-hidden="true"></i> Change password
+        </a>
+    </div>
+
+    {{ parent() }}
+
+{% endblock %}
+

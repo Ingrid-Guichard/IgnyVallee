@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Article - IgnyValléeComestible{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-10 mt-2">
+            <a href="{{ path('articles_index') }}">
+                <img src="{{ asset('build/images/return.svg') }}" class="button_return" alt="Retour">
+            </a>
+        </div>
+        <div class="col-1 mt-2">
+            <a href="{{ path('articles_edit', {'id': article.id}) }}">
+                <img src="{{ asset('build/images/edit.svg') }}" class="button_edit" alt="Modifier">
+            </a>
+        </div>
+        <div class="col-1 pb-3 mt-0">
+            {{ include('articles/_delete_form.html.twig') }}
+        </div>
+    </div>
+<div class="card">
+    <div class="card-header">
+        <h4 class="font-weight-bold text-danger text-lg-center mt-1">{{ article.titre }}</h4>
+    </div>
+    <div class="card-body">
+        {{ article.contenu }}
+
+        {% if article.imageName %}
+            <hr>
+
+            <img width="150" height="150" src="{{asset('uploads/imagesArticles/' ~ article.imageName)}}">
+        {% endif %}
+    </div>
+    <div class="card-footer blockquote-footer text-lg-right">
+        {{ article.date|date('d-m-Y') }}
+    </div>
+</div>
+
+{% endblock %}

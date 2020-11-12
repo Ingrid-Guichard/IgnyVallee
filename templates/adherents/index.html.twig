@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Adherents index{% endblock %}
+
+{% block leftside %}
+    {{ include('adherents/_formFiltres.html.twig') }}
+{% endblock %}
+
+{% block content %}
+    <h1>Liste des adhérents
+        <a href="{{ path('adherents_new') }}" class="btn btn-success mt-2 button_creer">Ajouter un adhérent</a>
+        <a href="{{ path('adherents_index_excel') }}" class="btn btn-success mt-2">Faire un export Excel</a>
+    </h1>
+    <table class="table table-responsive">
+        <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Email</th>
+            <th>Date d'adhésion</th>
+            <th>Admin ?</th>
+            <th>Référent ?</th>
+            <th>Archivé ?</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for adherent in adherents|filter (adherent => adherent.valide == true) -%}
+            <tr>
+                <td>{{ adherent.nom }}</td>
+                <td>{{ adherent.prenom }}</td>
+                <td>{{ adherent.email }}</td>
+                <td>{{ adherent.debutAdhesion | format_date(locale='fr') }}</td>
+                <td>{{ adherent.isAdmin ? 'Oui' : 'Non' }}</td>
+                {% if adherent.isReferentP == 1 or adherent.isReferentR == 1 or adherent.isReferentV == 1 %}
+                    <td>Oui</td>
+                {% else %}
+                    <td>Non</td>
+                {% endif %}
+                <td>{{ adherent.isArchive ? 'Oui' : 'Non' }}</td>
+                <td>
+                    <form method="post" action="{{ path('adherents_delete', {'id': adherent.id}) }}" onsubmit="return confirm('Etes-vous sûr de vouloir supprimer cet adhérent ?');">
+                        <a href="{{ path('adherents_show', {'id': adherent.id}) }}" class="btn btn-outline-success btn-sm mr-2">Voir plus</a>
+                        <a href="{{ path('adherents_edit', {'id': adherent.id}) }}">
+                            <img src="{{ asset('/build/images/edit.svg') }}" class="button_adherent_index ml-1 "  alt="Modifier">
+                        </a>
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ adherent.id) }}">
+                        <button class="btn btn-sm" >
+                            <img src="{{ asset('/build/images/supprimer.svg') }}" class="button_adherent_index"  alt="Supprimer">
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="25">Pas d'adhérents trouvés</td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+{% endblock %}
+
+
+{% block rightside %}
+    {{ include('fragments/_lastAteliers.html.twig') }}
+{% endblock %}
+

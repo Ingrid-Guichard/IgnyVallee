@@ -1,0 +1,149 @@
+<nav>
+    {% block nav %}
+        <div class="navbar navbar-expand-lg navbar-light bg-light justify-content-between mt-3">
+            <button class="navbar-toggler order-2" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarNav" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="{{ path('app_homepage') }}">
+                Igny Vallée Comestible</a>
+
+            <div class="collapse navbar-collapse w-100 order-3 order-lg-1" id="navbarSupportedContent">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownDocu" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Bibliothèque
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownArchives">
+                            <a class="dropdown-item" href="{{ path('app_doc_documentation') }}">Documentation</a>
+                        </div>
+                    </li>
+
+                    {% if is_granted('ROLE_REFERENT') %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Gestion des adhérents
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            {% if is_granted('ROLE_ADMIN') %}
+                            <a class="dropdown-item" href="{{ path('adherents_index') }}"> Liste des
+                                adhérents </a>
+                            <a class="dropdown-item" href="{{ path('adherents_new') }}">Ajouter un
+                                adhérent</a>
+                            <a class="dropdown-item" href="{{ path('adherents_liste_a_valider') }}"> Valider
+                                une demande </a>
+                            <a class="dropdown-item" href="{{ path('heures_gestion_admins') }}"> Gestion
+                                des heures </a>
+                            {% elseif is_granted('ROLE_REFERENT') %}
+                                <a class="dropdown-item" href="{{ path('adherents_index_referent') }}"> Liste des
+                                        adhérents </a>
+                            {%  endif %}
+                            <a class="dropdown-item" href="{{ path('diffusion_mails') }}"> Contacter les adhérents </a>
+                        </div>
+                    </li>
+                    {%  endif %}
+
+                    {% if is_granted('ROLE_ADHERENT') %}
+                        {% if app.user.isActPotager == true %}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Potager
+                            </a>
+                            </li>
+                        {% endif %}
+
+                        {% if app.user.isActRucher == true %}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Rucher
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" href="{{ path('ruchers_index') }}"> Liste des
+                                        ruchers </a>
+                                    <a class="dropdown-item" href="{{ path('ruches_index') }}"> Liste des
+                                        ruches </a>
+                                    <a class="dropdown-item" href="{{ path('fiches_de_visite_index') }}"> Liste des
+                                        fiches de visite </a>
+                                </div>
+                            </li>
+                        {% endif %}
+
+                        {% if app.user.isActVerger == true %}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Verger
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" href="{{ path('arbres_index') }}"> Liste des
+                                        arbres </a>
+                                      {% if is_granted('ROLE_REFERENT') %}
+                                        <a class="dropdown-item" href="{{ path('arbres_a_valider_index') }}"> Liste des
+                                            demandes de parrainage </a>
+                                      {% endif %}
+                                </div>
+                            </li>
+                        {% endif %}
+                    {% endif %}
+
+                    {% if is_granted('ROLE_ADHERENT') %}
+                    <li class="nav-item ">
+                        <a class="nav-link " href="{{ path('event_calendar') }}" id="navbarDropdownMenuLink" role="button"
+                            aria-haspopup="true" aria-expanded="false">
+                            Agenda
+                        </a>
+                    </li>
+                    {%  endif %}
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="{{ path('event_calendar') }}" id="navbarDropdownMenuLink" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Evenements
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            {% if is_granted('ROLE_ADHERENT') %}
+                                <a class="dropdown-item" href="{{ path('ateliers_index') }}"> Liste des ateliers </a>
+                            {% endif %}
+                            <a class="dropdown-item" href="{{ path('events_index') }}"> Liste des évènements </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="collapse navbar-collapse justify-content-end w-100 order-3" id="navbarSupportedContent">
+                <ul class="navbar-nav">
+                    {% if app.user %}
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                               role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img src="#" width="40" height="40" class="rounded-circle" alt="">
+                                {{ app.user.nom }}
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="{{ path('user_edit') }}">Modifier mon profil</a>
+                                <a class="dropdown-item" href="{{ path('list') }}">Bureau</a>
+                                <a class="dropdown-item" href="{{ path('app_logout') }}">Déconnexion</a>
+
+
+                            </div>
+                        </li>
+                    {% else %}
+                        <li><a class="nav-link" href="{{ path('app_login') }}">Connexion</a></li>
+                        <li>
+                            <a class="nav-link" href="{{ path('registration') }}">Adhérer</a>
+                        </li>
+                    {% endif %}
+
+
+
+                </ul>
+            </div>
+        </div>
+    {% endblock %}
+</nav>

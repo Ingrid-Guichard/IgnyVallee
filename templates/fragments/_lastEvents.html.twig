@@ -1,0 +1,18 @@
+
+    <div class="container-fluid future_events ">
+        <div class="titreLast mr-0 ml-0">
+            <p class="font-weight-bold text-center" style="color: #ffffff">Prochains évènements</p>
+        </div>
+        <div class="evenements">
+            {% for event in eventsLast  %}
+                <div class="card border-danger" style="max-width: 18rem;">
+                    <div class="card-body">
+                        <h6 class="card-title text-success">{{ event.nom }}</h6>
+                        <p class="card-text font-italic text-right">{{ event.dateDebut |format_datetime(locale='fr',  timeFormat='short', dateFormat='full') }}</p>
+                        <p class="card-text"> {{ event.description }}</p>
+                        <p class="card-text text-right"><a href="{{ path('events_show', {'id': event.id}) }}" class="card-link text-info">Voir plus</a></p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>

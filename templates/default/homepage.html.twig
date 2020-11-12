@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    {{ form(form) }}
+
+    <div class="jumbotron-img jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">The main test page</h1>
+            <p class="lead">TO DO : A lot of things but no one should ever see that</p>
+        </div>
+    </div>
+{% endblock %}
+
+{% block rightside %}
+  {{ include('form/_formContact.html.twig') }}
+{% endblock %}

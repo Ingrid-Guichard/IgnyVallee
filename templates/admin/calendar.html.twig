@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Calendrier {%  endblock %}
+
+{% block content %}
+
+    <h1 class="text-center mb-5" id="calendar_title"> Agenda </h1>
+    <div id="calendar-holder" class="mb-5 ml-2 mr-2"></div>
+
+    <div class ="row justify-content-between">
+        {% if is_granted('ROLE_ADMIN') %}
+
+            <div class="col-3 text-center">
+                <a href="{{ path('events_new') }}"  class="btn btn-danger mb-3 "
+                   id="button_creerEvent">Créer nouvel évènement</a>
+            </div>
+
+        {%  endif %}
+
+        {% if is_granted('ROLE_REFERENT') %}
+            <div class="col-3 text-center">
+                <a href="{{ path('ateliers_new') }}"  class="btn btn-success mb-3 "
+                   id="button_creerAtelierOnCalendar">Créer nouvel atelier</a>
+            </div>
+        {%  endif %}
+    </div>
+
+
+
+{% endblock %}

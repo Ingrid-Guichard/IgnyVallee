@@ -1,0 +1,14 @@
+{{ form_start(form) }}
+
+    {# Changement du label de l'attribut "adherent"   #}
+        {{ form_label(form.adherent,
+            "Adhérent") }}
+        {# Affichage de la zone à remplir du formulaire pour l'attribut "adherent" #}
+        {{ form_widget(form.adherent,{'attr': {
+            'class': "mb-2 mt-1"}} )}}
+
+    <div class="button_Formulaire">
+        <button type="submit" class="btn btn-outline-success mb-3 mt-3">Ajouter</button>
+    </div>
+
+{{ form_end(form) }}

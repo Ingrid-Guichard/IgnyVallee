@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+{% block title %}Mentions Legales - Igny Vallée Comestible{% endblock %}
+
+{% block content %}
+    <div class="">
+        <h1>Mentions légales du site Igny Vallee Comestible</h1>
+
+        <p>
+            Igny Vallee Comestible <br>
+            20, chemin Des Fraises, 91430 Igny <br>
+            [téléphone] <br>
+            ignyvalleecomestible@gmail.com
+        </p>
+
+        <p>
+            Directeur/trice de publication : [nom prénom] <br>
+            [e-mail]
+        </p>
+
+        <p>
+            Hébergeur :
+            [coordonnées de l'hébergeur du site]"
+        </p>
+    </div>
+{% endblock %}
+
+
+{% block rightside %}
+  {{ include('form/_formContact.html.twig') }}
+{% endblock %}

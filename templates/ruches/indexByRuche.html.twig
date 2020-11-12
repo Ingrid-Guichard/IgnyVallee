@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fiches index{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="col-6">
+            <a href="{{  path('ruchers_show_ruches', {'id': rucher.id}) }}"  class="btn btn-outline-success mb-3 mt-4" >Revenir aux ruches</a>
+        </div>
+        <div class="col-11">
+            {% if is_granted('ROLE_REFERENT') %}
+                <h1 class="mt-2"> Liste des fiches de visites
+                    <a href="{{ path('fiches_de_visite_new', {'id': ruch.id}) }}"  class="btn btn-success mb-3 mt-3 mr-5 button_creer" >Créer nouvelle fiche</a>
+                    <a href="{{ path('ruche_fdv_excel', {'id': ruch.id}) }}" class="btn btn-success">Faire un export Excel</a>
+                </h1>
+            {% else %}
+                <h1 class="mt-2"> Liste des  fiches de visites </h1>
+            {% endif %}
+        </div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Date de la visite</th>
+                <th>Nom du visiteur</th>
+                <th>Type de visite</th>
+                <th>Durée de la visite</th>
+                <th>Naissance de la reine</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for fiches_de_visite in fiches_de_visites %}
+                <tr>
+                    <td>{{ fiches_de_visite.dateVisite ? fiches_de_visite.dateVisite|date('d-m-Y') : '' }}</td>
+                    <td>{{ fiches_de_visite.adherent.nom }}</td>
+                    <td>{{ fiches_de_visite.typeVisite }}</td>
+                    <td>
+                        {% if fiches_de_visite.tempsVisite %}
+                            {{ fiches_de_visite.tempsVisite }} minutes
+                        {% endif %}
+                    </td>
+                    <td>{{ ruch.naissanceReine |format_datetime('short' , 'none', locale='fr') }}</td>
+                    <td>
+                        {% if is_granted('ROLE_REFERENT') %}
+                            <form method="post" action="{{ path('fiches_de_visite_delete', {'id': fiches_de_visite.id}) }}" onsubmit="return confirm('Etes-vous sûr de vouloir supprimer cette fiche ?');">
+                                <a href="{{ path('fiches_de_visite_show', {'id': fiches_de_visite.id}) }}" class="btn btn-outline-success btn-sm mr-2">Voir plus</a>
+                                <input type="hidden" name="_method" value="DELETE">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ fiches_de_visite.id) }}">
+                                <button class="btn btn-sm" >
+                                    <img src="{{ asset('/build/images/supprimer.svg') }}" class="button_atelier_index"  alt="Supprimer">
+                                </button>
+
+                                <a href="{{ path('fiches_de_visite_edit', {'id': fiches_de_visite.id}) }}">
+                                    <img src="{{ asset('/build/images/edit.svg') }}" class="button_atelier_index ml-1 "  alt="Modifier">
+                                </a>
+
+                            </form>
+                        {% endif %}
+
+                        {% if not is_granted('ROLE_REFERENT') %}
+                            <a href="{{ path('fiches_de_visite_show', {'id': fiches_de_visite.id}) }}" class="btn btn-outline-success btn-sm mr-2">Voir plus</a>
+                        {% endif %}
+
+{#                        <a href="{{ path('fiches_de_visite_show', {'id': fiches_de_visite.id}) }}" class="btn btn-outline-success btn-sm mr-2">Voir plus</a>#}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="32">Aucune fiche de visite n'a été ajoutée</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+
+

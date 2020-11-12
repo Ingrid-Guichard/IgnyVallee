@@ -1,0 +1,20 @@
+
+{% if is_granted('ROLE_ADHERENT') %}
+    <div class="container-fluid future_events">
+        <div class="titreLast mr-0 ml-0">
+            <p class="font-weight-bold text-center" style="color: #ffffff">Prochains ateliers</p>
+        </div>
+        <div class="evenements">
+            {% for atelier in ateliersLast  %}
+                <div class="card border-danger" style="max-width: 18rem;">
+                    <div class="card-body">
+                        <h6 class="card-title text-success">{{ atelier.nom }}</h6>
+                        <p class="card-text font-italic text-right">{{ atelier.dateDebut |format_datetime(locale='fr',  timeFormat='short', dateFormat='full') }}</p>
+                        <p class="card-text"> {{ atelier.description }}</p>
+                        <p class="card-text text-right"><a href="{{ path('ateliers_show', {'id': atelier.id}) }}" class="card-link text-info">Voir plus</a></p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+</div>
+{% endif %}

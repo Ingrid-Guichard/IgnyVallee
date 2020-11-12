@@ -1,0 +1,7 @@
+<form method="post" action="{{ path('fiches_de_visite_delete', {'id': fiches_de_visite.id}) }}" onsubmit="return confirm('Etes-vous sûr de vouloir supprimer cette fiche de visite?');">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ fiches_de_visite.id) }}">
+    <button class="btn button_supp" >
+        <img src="{{ asset('/build/images/supprimer.svg') }}" class="button_supp"  alt="Supprimer">
+    </button>
+</form>

@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les archives de l'association - IgnyValléeComestible{% endblock %}
+
+{% block content %}
+<div class="row mb-3">
+    <div class="col-11">
+    <h1>Les archives de l'association</h1>
+    </div>
+    <div class="col-1">
+        <a href="{{ path('articles_new') }}">
+            <img src= "{{  asset ('/build/images/add.png') }}" class="button mt-3 button_creerArticles" alt="Ajouter">
+        </a>
+    </div>
+</div>
+{% for annees in range("now"|date("Y"), 2016) %}
+    <div class="accordion" id="accordionExample">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="mb-0">
+                    <button class="btn btn-outline-success collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                        Articles {{ annees }}
+                    </button>
+                </h2>
+            </div>
+            {% for article in articles %}
+                    {%  if article.date|date('Y') == annees %}
+                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                            <div class="card-body">
+                                <a href="{{ path('articles_show', {'id': article.id}) }}" class="btn btn-link text-black-50">{{ article.titre }}</a>
+                            </div>
+                        </div>
+                    {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endfor %}
+
+{% endblock %}

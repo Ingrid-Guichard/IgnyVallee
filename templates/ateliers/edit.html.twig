@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier ateliers{% endblock %}
+
+{% block content %}
+
+
+    <div class="formulaire mr-4 ml-4">
+        <div class="card border-danger mb-3 mt-5" >
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-4">
+                        <a href="{{ path('event_calendar') }}">
+                            <img src="{{ asset('/build/images/return.svg') }}" class="button_return mt-3 ml-4"  alt="Retour"
+                                 width="50px" height="50px">
+                        </a>
+                    </div>
+                    <div class="col-4">
+                        <h1 class="mt-2"> Edition d'un atelier </h1>
+                    </div>
+                    <div class="col-4">
+                        {{ include('ateliers/_delete_form.html.twig') }}
+                    </div>
+                </div>
+
+            </div>
+            <div class="card-body text-danger">
+                {# Début du formulaire #}
+                {{ form_start(form) }}
+
+                {# Changement du label de l'attribut "nom"   #}
+                {{ form_label(form.nom,
+                    "Titre de l'atelier") }}
+                {# Affichage de la zone à remplir du formulaire pour l'attribut "nom" #}
+                {{ form_widget(form.nom,{'attr': {
+                    'placeholder': "ex : Cueillette",
+                    'class': "mb-2 mt-1"}} )}}
+
+                <div class="row justify-content-center">
+                    <div class="col-6">
+                        {{ form_label(form.dateDebut,
+                            "Date de début") }}
+                        {{ form_widget(form.dateDebut,{'attr': {
+                            'class': "mb-2 mt-1"}} )}}
+                    </div>
+
+                    <div class="col-6">
+                        {{ form_label(form.dateFin,
+                            "Date de fin") }}
+                        {{ form_widget(form.dateFin,{'attr': {
+                            'class': "mb-4 mt-1"}} )}}
+                    </div>
+                </div>
+
+                {{ form_label(form.activite,
+                    "Activité rattachée") }}
+                {{ form_widget(form.activite,{'attr': {
+                    'class': "mb-2 mt-1"}} )}}
+
+                {{ form_label(form.taches,
+                    "Tâches à réalisées") }}
+                {{ form_widget(form.taches,{'attr': {
+                    'class': "mb-2 mt-1"}} )}}
+
+                {{ form_label(form.heuresGestionAtelier,
+                    "Nombre d'heures de gestion de l'atelier") }}
+                {{ form_widget(form.heuresGestionAtelier,{'attr': {
+                    'class': "mb-2 mt-1"}} )}}
+
+                {{ form_label(form.referents,
+                    "Référents") }}
+                {{ form_widget(form.referents,{'attr': {
+                    'class': "mb-2 mt-1"}} )}}
+
+                {{ form_label(form.description,
+                    "Description") }}
+                {{ form_widget(form.description,{'attr': {
+                    'class': "mb-2 mt-1"}} )}}
+
+                <div class="button_Formulaire">
+                    <button type="submit" class="btn btn-outline-success mb-4 mt-3">Modifier l'atelier</button>
+                </div>
+
+                {# Fin du formulaire #}
+                {{ form_end(form) }}
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,163 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Adherents{% endblock %}
+
+{% block content %}
+    <div class="formulaire mr-4 ml-4">
+        <div class="card border-danger mb-4 mt-3" >
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-4">
+                        <a href="{{ path('adherents_index_referent') }}">
+                            <img src="{{ asset('/build/images/return.svg') }}" class="button_return mt-3 ml-4"  alt="Retour">
+                        </a>
+                    </div>
+                    <div class="col-4">
+                        <h1 class="mt-2"> {{ adherent.prenom|capitalize }} {{ adherent.nom|upper }} </h1>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <th>Id</th>
+                        <td>{{ adherent.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <td>{{ adherent.email }}</td>
+                    </tr>
+                    <tr>
+                        <th>Nom</th>
+                        <td>{{ adherent.nom }}</td>
+                    </tr>
+                    <tr>
+                        <th>Prenom</th>
+                        <td>{{ adherent.prenom }}</td>
+                    </tr>
+                    <tr>
+                        <th>Adresse</th>
+                        <td>{{ adherent.adresse }}</td>
+                    </tr>
+                    <tr>
+                        <th>Telephone</th>
+                        <td>{{ adherent.telephone }}</td>
+                    </tr>
+                    <tr>
+                        <th>DebutAdhesion</th>
+                        <td>{{ adherent.debutAdhesion |format_datetime('short', 'none', locale='fr') }}</td>
+                    </tr>
+                    <tr>
+                        <th>FinAdhesion</th>
+                        <td>{{ adherent.finAdhesion |format_datetime('short', 'none', locale='fr') }}</td>
+                    </tr>
+                    <tr>
+                        <th>Actif Potager</th>
+                        <td>{{ adherent.isActPotager ? 'Oui' : 'Non' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Actif Verger</th>
+                        <td>{{ adherent.isActVerger ? 'Oui' : 'Non' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Actif Rucher</th>
+                        <td>{{ adherent.isActRucher ? 'Oui' : 'Non' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Actif Animation</th>
+                        <td>{{ adherent.isActAnimation ? 'Oui' : 'Non' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Actif Promotion</th>
+                        <td>{{ adherent.isActPromotion ? 'Oui' : 'Non' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Intéressé Potager</th>
+                        <td>{{ adherent.isIntPotager ? 'Oui' : 'Non' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Intéressé Verger</th>
+                        <td>{{ adherent.isIntVerger ? 'Oui' : 'Non' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Intéressé Rucher</th>
+                        <td>{{ adherent.isIntRucher ? 'Oui' : 'Non' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Intéréssé Animation</th>
+                        <td>{{ adherent.isIntAnimation ? 'Oui' : 'Non' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Administrateur</th>
+                        <td>{{ adherent.isAdmin ? 'Oui' : 'Non' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Référent Potager</th>
+                        <td>{{ adherent.isReferentP ? 'Oui' : 'Non' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Référent Rucher</th>
+                        <td>{{ adherent.isReferentR ? 'Oui' : 'Non' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Référent Verger</th>
+                        <td>{{ adherent.isReferentV ? 'Oui' : 'Non' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Prix de l'adhésion</th>
+                        <td>{{ adherent.prixAdhesion }}</td>
+                    </tr>
+                    <tr>
+                        <th>Adhésion payée</th>
+                        <td>{{ adherent.isPayed ? 'Oui' : 'Non' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Type de paiement</th>
+                        <td>{{ adherent.typePaiement }}</td>
+                    </tr>
+                    <tr>
+                        <th>Adhérent archivé</th>
+                        <td>{{ adherent.isArchive ? 'Oui' : 'Non' }}</td>
+                    </tr>
+                    {% if adherent.arbres is not empty %}
+                        <tr>
+                            <th>Arbres</th>
+                            {% for arbre in adherent.arbres%}
+                                <td class="row">Fruit : {{ arbre.nomFruitArbre }}, Numero: {{ arbre.numeroArbre }}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endif %}
+                    {% if adherent.activites is not empty %}
+                        <tr>
+                            <th>Activité(s)</th>
+                            {% for activite in adherent.activites%}
+                                <td class="row">{{ activite.nom }}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endif %}
+
+                    {% if listeEvents is not empty %}
+                        <tr>
+                            <th>Evènement(s)</th>
+                            {% for event in listeEvents%}
+                                <td class="row">{{ event.nom }}, debut : {{ event.dateDebut |format_datetime('short', 'none', locale='fr')}}, fin : {{ event.dateFin|format_datetime('short', 'none', locale='fr') }}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endif %}
+
+                    {% if adherent.ateliers is not empty %}
+                        <tr>
+                            <th>Atelier(s)</th>
+                            {% for atelier in adherent.ateliers%}
+                                <td class="row">{{ atelier.nom }}, debut : {{ atelier.dateDebut |format_datetime('short', 'none', locale='fr') }}, fin : {{ atelier.dateFin |format_datetime('short', 'none', locale='fr') }}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

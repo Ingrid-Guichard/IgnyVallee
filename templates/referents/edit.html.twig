@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Referents{% endblock %}
+
+{% block body %}
+    <h1>Edit Referents</h1>
+
+    {{ include('referents/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('referents_index') }}">back to list</a>
+
+    {{ include('referents/_delete_form.html.twig') }}
+{% endblock %}

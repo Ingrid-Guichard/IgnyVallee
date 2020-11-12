@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ruchers index{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+        {% if is_granted('ROLE_REFERENT') %}
+            <h1 class="mt-2"> Liste des ruchers  <a href="{{ path('ruchers_new') }}"  class="btn btn-success mb-3 mt-3 mr-5 button_creer" >Créer nouveau rucher</a> </h1>
+        {% else %}
+            <h1 class="mt-2"> Liste des ruchers </h1>
+        {% endif %}
+    <table class="table table-responsive">
+        <div class ="row align-items-center">
+            <thead>
+            <tr>
+                <th class="text-center">Nom du rucher</th>
+                <th class="text-center">Emplacement</th>
+                <th class="text-center">Partenaire</th>
+                <th class="text-center">Date de création</th>
+                <th class="text-center">Actions</th>
+            </tr>
+        </thead>
+        </div>
+        <tbody>
+        {% for rucher in ruchers %}
+            <tr>
+                <td>{{ rucher.nomRucher }}</td>
+                <td>{{ rucher.lieuRucher }}</td>
+                {% if not rucher.partenaireRucher is empty %}
+                    <td>{{ rucher.partenaireRucher }}</td>
+                {% else %}
+                    <td> Aucun </td>
+                {% endif %}
+
+                <td>{{ rucher.dateCreationRucher |format_datetime('short' , 'none', locale='fr') }}</td>
+                <td>
+                    {% if is_granted('ROLE_REFERENT') %}
+                        <form method="post" action="{{ path('ruchers_delete', {'id': rucher.id}) }}" onsubmit="return confirm('Etes-vous sûr de vouloir supprimer ce rucher ?');">
+                            <a href="{{ path('ruchers_show', {'id': rucher.id}) }}" class="btn btn-outline-success btn-sm mr-2">Voir plus</a>
+                            <a href="{{ path('ruchers_show_ruches', {'id': rucher.id}) }}" class="btn btn-outline-danger btn-sm mr-2">Voir Ruches</a>
+
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ rucher.id) }}">
+                            <button class="btn btn-sm" >
+                                <img src="{{ asset('/build/images/supprimer.svg') }}" class="button_atelier_index"  alt="Supprimer">
+                            </button>
+
+                            <a href="{{ path('ruchers_edit', {'id': rucher.id}) }}">
+                                <img src="{{ asset('/build/images/edit.svg') }}" class="button_atelier_index ml-1 "  alt="Modifier">
+                            </a>
+
+                        </form>
+                    {% endif %}
+
+                    {% if not is_granted('ROLE_REFERENT') %}
+                        <a href="{{ path('ruchers_show', {'id': rucher.id}) }}" class="btn btn-outline-success btn-sm mr-2">Voir plus</a>
+                        <a href="{{ path('ruchers_show_ruches', {'id': rucher.id}) }}" class="btn btn-outline-danger btn-sm mr-2">Voir Ruches</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
+
+{% block leftside %}
+    <div class="filters card text-black bg-light mt-0"> <!--pour la bordure du conteneur-->
+        <div class="card-header">Filtrer par </div>
+        <div class="card-body">
+            <span class="badge badge-dark ml-4 mb-4">Annee :</span>
+            <div class="form-check">
+                {{ form_start(form) }}
+
+                {{ form_widget(form.date  ,{'attr': {
+                    'placeholder': "Veuillez entrer une année",
+                    'class': "mb-4"}}  )}}
+
+                <span class="badge badge-dark  mb-4">Nom :</span>
+
+                {{ form_widget(form.nom  ,{'attr': {
+                    'class': "mb-2"}}  )}}
+
+                <div class="button_Formulaire">
+                    <button type="submit" class="btn btn-success mt-3 mr-3">Filtrer</button>
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

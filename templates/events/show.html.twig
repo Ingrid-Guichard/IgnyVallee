@@ -1,0 +1,162 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{event.nom}} {% endblock %}
+
+{% block content %}
+
+    <div class="formulaire mr-4 ml-4">
+        <div class="card border-danger mb-4 mt-3" >
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-4">
+                        <a href="{{ path('event_calendar') }}">
+                            <img src="{{ asset('/build/images/return.svg') }}" class="button_return mt-3 ml-4"  alt="Retour"
+                                 width="50px" height="50px">
+                        </a>
+                    </div>
+                    <div class="col-4">
+                        <h1 class="mt-2"> {{event.nom}} </h1>
+                    </div>
+                    <div class="col-4">
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <a href="{{ path('events_edit', {'id': event.id}) }}">
+                                <img src="{{ asset('/build/images/edit.svg') }}" class="button_edit mt-3 mr-4"  alt="Retour">
+                            </a>
+                            {{ include('events/_delete_form.html.twig') }}
+                        {% endif %}
+                        <a href="{{ path('events_index') }}">
+                            <img src="{{ asset('/build/images/list.svg') }}" class="button_edit mt-3 mr-4"  alt="Liste des ateliers"
+                                 width="50px" height="50px">
+                        </a>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="card-body">
+
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th>Début de l'évènement</th>
+                            <td>{{ event.dateDebut |format_datetime(locale='fr') }}</td>
+                        </tr>
+                        <tr>
+                            <th>Fin de l'évènement</th>
+                            <td>{{ event.dateFin |format_datetime(locale='fr') }}</td>
+                        </tr>
+                        <tr>
+                            <th>Prix</th>
+                            <td>{{ event.prix }}</td>
+                        </tr>
+                        <tr>
+                            <th>Description</th>
+                            <td>{{ event.description }}</td>
+                        </tr>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <tr>
+                                <th>Heures de gestion</th>
+                                <td>{{ event.heuresGestionEvent }}</td>
+                            </tr>
+                        {% endif %}
+
+                        {% if not event.partenaire is empty %}
+                        <tr>
+                            <th>Partenaire(s)</th>
+                            <td >{{ event.partenaire.nom }}</td>
+                        </tr>
+                        {% endif %}
+
+                        {% if is_granted('ROLE_ADHERENT') %}
+                            <tr>
+                                <th> Organisateur(s)</th>
+                                {% if not event.admins is empty %}
+                                    {% for event in event.admins %}
+                                        <td class="row m-0 ">{{ event.adherent.prenom }}</td>
+                                    {% endfor %}
+                                {%  else %}
+                                    <td>Non précisé</td>
+                                {% endif %}
+                            </tr>
+                        {% endif %}
+
+                        {% if is_granted('ROLE_REFERENT') %}
+                        <tr>
+                            <th> Participant(s)</th>
+                            {% if not event.participants is empty %}
+                                {% for participant in event.participants %}
+                                    <td class="row m-0 ">{{ participant.prenom }} {{ participant.nom }}</td>
+                                {% endfor %}
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <a href="{{ path('events_participants_excel', {'id': event.id}) }}" class="btn btn-success mb-3">Faire un export Excel des participants</a>
+                                {% endif %}
+
+                            {% else %}
+                                <td>Non précisé</td>
+                            {% endif %}
+                        </tr>
+                    {% endif %}
+
+                    </tbody>
+                </table>
+
+                <div class="row justify-content-around">
+                    {% if is_granted('ROLE_ADHERENT') %}
+                        {{ form_start(eventIns) }}
+                        <div class="button_Formulaire">
+                            <button type="submit" class="btn btn-outline-success mb-4 mt-3 ">M'inscrire</button>
+                        </div>
+                        {{ form_end(eventIns) }}
+
+                        {{ form_start(eventDesins) }}
+                        <div class="button_Formulaire">
+                            <button type="submit" class="btn btn-outline-danger mb-4 mt-3 ">Me désinscrire</button>
+                        </div>
+                        {{ form_end(eventDesins) }}
+                    {% endif %}
+
+                    {% if not is_granted('ROLE_ADHERENT') %}
+                        {{ form_start(eventInsVisiteur) }}
+
+                        {{ form_label(eventInsVisiteur.prenom,
+                            "Prénom") }}
+                        {{ form_widget(eventInsVisiteur.prenom,{'attr': {
+                            'placeholder': "Ex : Jean",
+                            'class': "mb-2 mt-1"}} )}}
+
+                        {{ form_label(eventInsVisiteur.nom,
+                            "Nom de famille") }}
+                        {{ form_widget(eventInsVisiteur.nom,{'attr': {
+                            'placeholder': "Ex : Dupont",
+                            'class': "mb-2 mt-1"}} )}}
+
+                        {{ form_label(eventInsVisiteur.email,
+                            "Email") }}
+                        {{ form_widget(eventInsVisiteur.email,{'attr': {
+                            'placeholder': "Ex : jean.dupont@gmail.com",
+                            'class': "mb-2 mt-1"}} )}}
+
+                        {{ form_label(eventInsVisiteur.telephone,
+                            "Téléphone") }}
+                        {{ form_widget(eventInsVisiteur.telephone,{'attr': {
+                            'placeholder': "Ex : 0652525252",
+                            'class': "mb-2 mt-1"}} )}}
+
+                        <div class="button_Formulaire">
+                            <button type="submit" class="btn btn-outline-success mb-4 mt-3 ">M'inscrire</button>
+                        </div>
+                        {{ form_end(eventInsVisiteur) }}
+                    {% endif %}
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+{% endblock %}

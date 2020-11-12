@@ -1,0 +1,7 @@
+<form method="post" action="{{ path('adherents_nonValide_delete', {'id': adherent.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer cette demande d'adhésion ?');">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ adherent.id) }}">
+    <button class="btn button_supp_event mt-2 mr-3" >
+        <img src="{{ asset('/build/images/supprimer.svg') }}" class="button_supp"  alt="Supprimer">
+    </button>
+</form>

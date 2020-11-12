@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Adherents index{% endblock %}
+
+{% block content %}
+    <h1>Adherents à valider <a href="{{ path('adherents_new') }}" class="btn btn-success mt-2 button_creer">Ajouter un adhérent</a></h1>
+
+    <table class="table table-responsive">
+        <thead>
+        <tr>
+            <th>Email</th>
+            <th>Nom</th>
+            <th>Prenom</th>
+            <th>Telephone</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for adherent in adherents %}
+            <tr>
+                <td>{{ adherent.email }}</td>
+                <td>{{ adherent.nom }}</td>
+                <td>{{ adherent.prenom }}</td>
+                <td>{{ adherent.telephone }}</td>
+                <td>
+                    <a href="{{ path('adherents_a_valide_show', {'id': adherent.id}) }}" class="btn btn-outline-success btn-sm mr-2">Voir plus</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="25">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+

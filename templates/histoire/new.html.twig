@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvelle image{% endblock %}
+
+{% block content %}
+
+<div class="formulaire mr-4 ml-4">
+    <div class="card border-danger mb-3 mt-5" >
+        <div class="card-header">
+            <div class="row">
+                <div class="col-2">
+                    <a href="{{ path('app_association_histoire') }}">
+                        <img src="{{ asset('/build/images/return.svg') }}" class="button_return mt-3 ml-4"  alt="Retour"
+                             width="50px" height="50px">
+                    </a>
+                </div>
+                <div class="col-8">
+                    <h1 class="mt-2"> Ajouter une image </h1>
+                </div>
+            </div>
+        </div>
+          <div class="card-body text-danger">
+              {{ include('histoire/_formImage.html.twig', {'button_label': 'Ajouter'}) }}
+          </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Envoyer un email{% endblock %}
+
+{% block content %}
+
+    <div class="formulaire mr-4 ml-4">
+        <div class="card border-danger mb-3 mt-5" >
+            <div class="card-header">
+                <h1 class="mt-2">
+                    <a href="{{ path('app_homepage') }}">
+                        <img src="{{ asset('/build/images/return.svg') }}" class="button_return_index"  alt="Retour">
+                    </a>
+                    Envoyer un email
+                </h1>
+            </div>
+            <div class="card-body text-danger">
+
+                {{ include('diffusionMails/_formDiffusionMails.html.twig') }}
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

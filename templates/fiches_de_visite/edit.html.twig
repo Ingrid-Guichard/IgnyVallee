@@ -1,0 +1,322 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier la fiche de visite - IgnyValleeComestible{% endblock %}
+
+{% block content %}
+    <div class="row mb-3">
+        <div class="col-11 mt-2">
+            <a href="{{ path('fiches_de_visite_show', {'id': fiches_de_visite.id}) }}">
+                <img src="{{ asset('build/images/return.svg') }}" class="button_return" alt="Retour">
+            </a>
+        </div>
+        <div class="col-1 pb-3 mt-0">
+            {{ include('fiches_de_visite/_delete_form.html.twig') }}
+        </div>
+    </div>
+
+    <div class="formulaire">
+        <div class="card new_article border-danger">
+            <div class="card-header font-weight-bold text-danger">Modifier la fiche de visite</div>
+            <div class="card-body">
+                {# Début du formulaire #}
+                {{ form_start(form) }}
+
+                {#<div class="row">
+                    <div class="col-9"></div>
+
+                    <div class="form-group col align-self-center">
+                        <label>N° rucher</label>
+                        <input class="form-control" type="text" placeholder="{{ ruchers.nomRucher }}" readonly>
+                    </div>
+
+                    <div class="form-group col align-self-center">
+                        <label>N° ruche</label>
+                        <input class="form-control" type="text" placeholder="{{ ruches.nomRuche }}" readonly>
+                    </div>
+
+                    <div class="form-group col align-self-center">
+                        <label>Naissance de la reine</label>
+                        <input class="form-control" type="text" placeholder="{{ ruches.naissanceReine }}" readonly>
+                    </div>
+                </div>
+
+                <hr>#}
+
+                <div class="row">
+                    <div class="form-group">
+                        {# Changement du label de l'attribut "dateVisite" #}
+                        {{ form_label (form.dateVisite, "Date de la visite") }}
+                        {# Affichage des menus déroulants pour l'attribut "dateVisite" #}
+                        {{ form_widget (form.dateVisite) }}
+                    </div>
+
+                    <div class="form-group col align-self-center">
+                        <label>Nom du visiteur</label>
+                        <input class="form-control" type="text" placeholder="{{ app.user.nom }}" readonly>
+                    </div>
+
+                    <div class="form-group col align-self-center">
+                        {{ form_label (form.typeVisite, "Type de visite") }}
+                        {{ form_widget (form.typeVisite) }}
+                    </div>
+
+                    <div class="form-group col align-self-center">
+                        {{ form_label (form.tempsVisite, "Durée de la visite") }}
+                        {{ form_widget (form.tempsVisite, {'attr': {
+                            'placeholder':'en min'}}) }}
+                        <small class="form-text text-muted">Temps depuis l'ouverture jusqu'à la fermeture du couvre cadre.</small>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="form-group">
+                    {{ form_label (form.objectifs, "Objectifs de la visite") }}
+                    {{ form_widget (form.objectifs) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_label (form.observations, "Observations générales") }}
+                    {{ form_widget (form.observations) }}
+                    <small class="form-text text-muted">Exemple : état général du couvain, ouvert blanc nacré, operculé, clairsemé - état des réserves de miel - activité - présence frelon asiatique - entretien sol d’envol, support, ruche, …</small>
+                </div>
+
+                <hr>
+
+                <div class="row">
+
+                    <div class="form-group col-3 align-self-center">
+                        {{ form_label (form.poidsRuche,"Poids de la ruche") }}
+                        {{ form_widget (form.poidsRuche, {'attr': {
+                            'placeholder':'en kg'}}) }}
+                        <small class="form-text text-muted">Peser le corps de ruche avec couvre cadre sans hausse ni nourrisseur – saisir 2 fois la valeur mesurée du peson.</small>
+                    </div>
+
+                    <div class="form-group col-4 align-self-center">
+                        {{ form_label (form.tauxAgressiviteAbeilles, "Taux d'aggressivité des abeilles") }}
+                        {{ form_widget (form.tauxAgressiviteAbeilles) }}
+                        <div class="row">
+                            <div class="col ml-3">1</div>
+                            <div class="col">2</div>
+                            <div class="col">3</div>
+                            <div class="col">4</div>
+                            <div class="col">5</div>
+                        </div>
+                        <small class="form-text text-muted">(0 pas agressives - 5 très agressives)</small>
+                    </div>
+
+                    <div class="form-group col align-self-center">
+                        {{ form_label (form.nourrissement, "Nourrissement (volume et type de sirop)") }}
+                        <div class="row">
+                            <div class="col-4 align-self-center">
+                                {{ form_widget (form.nourrissement, {'attr': {
+                                    'placeholder':'Volume en L'}}) }}
+                            </div>
+                            <div class="col align-self-center">
+                                {{ form_widget (form.typeSirop) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="form-group col align-self-center">
+                    {{ form_label (form.cadre1, "Cadre n°1") }}
+                    <div class="row">
+                        <div class="col-10 align-self-center">
+                            {{ form_widget (form.cadre1) }}
+                        </div>
+                        <div class="col align-self-center">
+                            {{ form_widget (form.typeStructure1) }}
+                        </div>
+                    </div>
+                    <small class="form-text text-muted">Cadre de rive gauche.</small>
+                </div>
+
+                <div class="form-group col align-self-center">
+                    {{ form_label (form.cadre2, "Cadre n°2") }}
+                    <div class="row">
+                        <div class="col-10 align-self-center">
+                            {{ form_widget (form.cadre2) }}
+                        </div>
+                        <div class="col align-self-center">
+                            {{ form_widget (form.typeStructure2) }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col align-self-center">
+                    {{ form_label (form.cadre3, "Cadre n°3") }}
+                    <div class="row">
+                        <div class="col-10 align-self-center">
+                            {{ form_widget (form.cadre3) }}
+                        </div>
+                        <div class="col align-self-center">
+                            {{ form_widget (form.typeStructure3) }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col align-self-center">
+                    {{ form_label (form.cadre4, "Cadre n°4") }}
+                    <div class="row">
+                        <div class="col-10 align-self-center">
+                            {{ form_widget (form.cadre4) }}
+                        </div>
+                        <div class="col align-self-center">
+                            {{ form_widget (form.typeStructure4) }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col align-self-center">
+                    {{ form_label (form.cadre5, "Cadre n°5") }}
+                    <div class="row">
+                        <div class="col-10 align-self-center">
+                            {{ form_widget (form.cadre5) }}
+                        </div>
+                        <div class="col align-self-center">
+                            {{ form_widget (form.typeStructure5) }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col align-self-center">
+                    {{ form_label (form.cadre6, "Cadre n°6") }}
+                    <div class="row">
+                        <div class="col-10 align-self-center">
+                            {{ form_widget (form.cadre6) }}
+                        </div>
+                        <div class="col align-self-center">
+                            {{ form_widget (form.typeStructure6) }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col align-self-center">
+                    {{ form_label (form.cadre7, "Cadre n°7") }}
+                    <div class="row">
+                        <div class="col-10 align-self-center">
+                            {{ form_widget (form.cadre7) }}
+                        </div>
+                        <div class="col align-self-center">
+                            {{ form_widget (form.typeStructure7) }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col align-self-center">
+                    {{ form_label (form.cadre8, "Cadre n°8") }}
+                    <div class="row">
+                        <div class="col-10 align-self-center">
+                            {{ form_widget (form.cadre8) }}
+                        </div>
+                        <div class="col align-self-center">
+                            {{ form_widget (form.typeStructure8) }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col align-self-center">
+                    {{ form_label (form.cadre9, "Cadre n°9") }}
+                    <div class="row">
+                        <div class="col-10 align-self-center">
+                            {{ form_widget (form.cadre9) }}
+                        </div>
+                        <div class="col align-self-center">
+                            {{ form_widget (form.typeStructure9) }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col align-self-center">
+                    {{ form_label (form.cadre10, "Cadre n°10") }}
+                    <div class="row">
+                        <div class="col-10 align-self-center">
+                            {{ form_widget (form.cadre10) }}
+                        </div>
+                        <div class="col align-self-center">
+                            {{ form_widget (form.typeStructure10) }}
+                        </div>
+                    </div>
+                    <small class="form-text text-muted">Cadre de rive droite.</small>
+                </div>
+
+                <hr>
+
+                <div class="row">
+                    <div class="form-group col align-self-center">
+                        {{ form_label (form.quantiteAbeilles, "Nombre d'abeilles") }}
+                        {{ form_widget (form.quantiteAbeilles) }}
+                        <small class="form-text text-muted">3000 par cadre plein (1500 par face couverte d’abeilles).</small>
+                    </div>
+
+                    <div class="form-group col align-self-center">
+                        {{ form_label (form.nbCadresCouvain, "Nombre de cadres de couvain") }}
+                        {{ form_widget (form.nbCadresCouvain) }}
+                        <small class="form-text text-muted">Évaluer la surface totale de couvain en nb de cadres (compter 1 par couvain non clairsemé couvrant toute la partie centrale du cadre).</small>
+                    </div>
+
+                    <div class="form-group col align-self-center">
+                        {{ form_label (form.nbCadresMiel, "Nombre de cadres de miel") }}
+                        {{ form_widget (form.nbCadresMiel) }}
+                        <small class="form-text text-muted">Évaluer la surface totale en nb de cadres de miel sans couvain (saisir 1 pour 2 cadres à moitié remplis de miel).</small>
+                    </div>
+
+                    <div class="form-group col align-self-center">
+                        {{ form_label (form.nbCadresPollen, "Nombre de cadres de pollen") }}
+                        {{ form_widget (form.nbCadresPollen) }}
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="row">
+                    <div class="form-group col align-self-center">
+                        {{ form_label (form.calculVarroa, "Comptage Varroa") }}
+                        {{ form_widget (form.calculVarroa) }}
+                        <small class="form-text text-muted">Nombre de varroa comptés sur le plancher.</small>
+                    </div>
+
+                    <div class="form-group col align-self-center">
+                        {{ form_label (form.typeCouvain, "Types de couvains") }}
+                        {{ form_widget (form.typeCouvain) }}
+                    </div>
+
+                    <div class="form-group col align-self-center">
+                        {{ form_label (form.cellulesRoyales, "Cellules royales") }}
+                        {{ form_widget (form.cellulesRoyales) }}
+                    </div>
+
+                    <div class="form-group col align-self-center">
+                        {{ form_label (form.detectionReine, "Détection de la reine") }}
+                        {{ form_widget (form.detectionReine) }}
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="row">
+                    <div class="form-group col align-self-center">
+                        {{ form_label (form.reservePollen, "Réserve de pollen") }}
+                        {{ form_widget (form.reservePollen) }}
+                    </div>
+
+                    <div class="form-group col align-self-center">
+                        {{ form_label (form.reserveMiel, "Réserve de miel") }}
+                        {{ form_widget (form.reserveMiel) }}
+                    </div>
+                </div>
+
+                {{ form_widget(form) }}
+                <div class="row justify-content-md-center">
+                    <div class="col-4">
+                        <button class="btn btn-success" >{{ button_label|default('Enregistrer les modifications') }}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

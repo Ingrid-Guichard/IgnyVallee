@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+<div class="jumbotron-img jumbotron jumbotron-fluid">
+  <div class="container">
+    {% if is_granted('ROLE_ADMIN') %}
+      <h1 class="mb-5">{{ titre }} <a href="{{ path('site_boisement_newImage') }}" class="btn btn-success button_creer">Ajouter une image</a></h1>
+    {% else %}
+      <h1 class="mb-5">{{ titre }}</h1>
+    {% endif %}
+    <div class="row">
+
+
+      <div class="col-8">
+        <p class="text-justify mr-3">
+        {{description|raw }}
+        </p>
+
+        {% if is_granted('ROLE_ADMIN') %}
+          <div class="row justify-content-start mr-4">
+            <a href="{{ path('site_boisement_editPage', {'id': idBoisement}) }}">
+            <img src="{{ asset('/build/images/edit.svg') }}" class="button_edit_miniature mt-5 ml-3"  alt="edit">
+            </a>
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="col-4">
+        {% for image in images %}
+          <div class="row">
+            {% if is_granted('ROLE_ADMIN') %}
+              <div class="col-9">
+                <img class="mb-3" width="175" heigth="175" src="{{asset('uploads/imagesSiteBoisement/' ~ image.nom)}}">
+                </div>
+                <div class="col-3 align-self-center">
+                  <div class="row">
+                    <a href="{{ path('site_boisement_editImage', {'id': image.id}) }}">
+                    <img src="{{ asset('/build/images/edit.svg') }}" class="button_edit_miniature ml-3"  alt="edit">
+                    </a>
+                  </div>
+                  <div class="row">
+                    {{ include('boisement/_delete_form.html.twig') }}
+                  </div>
+                </div>
+                {% else %}
+                <img class="mb-2" width="225" heigth="225" src="{{asset('uploads/imagesSiteBoisement/' ~ image.nom)}}">
+                {% endif %}
+          </div>
+
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block rightside %}
+  {{ include('form/_formContact.html.twig') }}
+{% endblock %}

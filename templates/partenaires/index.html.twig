@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Partenaires index{% endblock %}
+
+{% block body %}
+    <h1>Partenaires index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>DatePartenariat</th>
+                <th>Email</th>
+                <th>LienDuSite</th>
+                <th>Description</th>
+                <th>ImageName</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for partenaire in partenaires %}
+            <tr>
+                <td>{{ partenaire.id }}</td>
+                <td>{{ partenaire.nom }}</td>
+                <td>{{ partenaire.datePartenariat ? partenaire.datePartenariat|date('Y-m-d') : '' }}</td>
+                <td>{{ partenaire.email }}</td>
+                <td>{{ partenaire.lienDuSite }}</td>
+                <td>{{ partenaire.description }}</td>
+                <td>{{ partenaire.imageName }}</td>
+                <td>
+                    <a href="{{ path('partenaires_show', {'id': partenaire.id}) }}">show</a>
+                    <a href="{{ path('partenaires_edit', {'id': partenaire.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('partenaires_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,30 @@
+{{ form_start(form) }}
+<div class="filters card text-black bg-light mt-0"> <!--pour la bordure du conteneur-->
+    <div class="card-header">Filtres</div>
+    <div class="card-body">
+
+        <!-- choix sous forme de check box permet de choisir les types d'adhérents-->
+        <div class="role-adherent ">
+            <span class="badge badge-pill badge-dark">Filtrer par activité</span></br></br>
+                {{ form_widget(form.activite)}}
+            </br>
+        </div>
+
+        <!-- filtre pour la recherche par nom d'un adhérent qu'importe son rôle -->
+        <div class="nom-adherent">
+            <span class="badge badge-pill badge-dark">Rechercher par nom</span></br></br>
+            <div class="form-group">
+                {{ form_widget(form.nom,{'attr': {
+                    'placeholder': "Entrer le nom"}}
+                ) }}
+                {{ form_widget(form.prenom,{'attr': {
+                    'placeholder': "Entrer le prénom"}}
+                ) }}
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-success button_filtre">Valider</button>
+
+    </div>
+</div>
+{{ form_end(form) }}

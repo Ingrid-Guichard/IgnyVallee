@@ -1,0 +1,227 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+
+    {# Filtres articles #}
+    <div class="jumbotron-img jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">Les archives de l'association</h1>
+            <p class="lead">
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                    <label class="form-check-label" for="inlineCheckbox1">Rucher pédagogique</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                    <label class="form-check-label" for="inlineCheckbox2">Jardin permacole</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
+                    <label class="form-check-label" for="inlineCheckbox3">Verger</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option4">
+                    <label class="form-check-label" for="inlineCheckbox4">Vie associative</label>
+                </div>
+                <button type="submit" class="btn btn-outline-danger">Filtrer</button>
+
+        {# Articles #}
+            annee=2016
+            {{ for  }}
+                <div class="accordion" id="accordionExample">
+                    <div class="card">
+                        <div class="card-header" id="headingOne">
+                            <h2 class="mb-0">
+                                <button class="btn btn-outline-success collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                    Articles 2020
+                                </button>
+                            </h2>
+                        </div>
+
+                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                            <div class="card-body">
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-link text-black-50" data-toggle="modal" data-target="#exampleModal">
+                                    Titre article
+                                </button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Titre de l'article</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Contenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec imagesContenu de l'article avec images
+                                            </div>
+                                            <div class="modal-footer">
+                                                tags ?? date?
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" id="headingTwo">
+                            <h2 class="mb-0">
+                                <button class="btn btn-outline-success collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    Articles 2019
+                                </button>
+                            </h2>
+                        </div>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                            <div class="card-body">
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-link text-black-50" data-toggle="modal" data-target="#exampleModal">
+                                    Titre article
+                                </button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Titre de l'article</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Contenu de l'article avec images
+                                            </div>
+                                            <div class="modal-footer">
+                                                tags ?? date?
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" id="headingThree">
+                            <h2 class="mb-0">
+                                <button class="btn btn-outline-success collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    Articles 2018
+                                </button>
+                            </h2>
+                        </div>
+                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                            <div class="card-body">
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-link text-black-50" data-toggle="modal" data-target="#exampleModal">
+                                    Titre article
+                                </button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Titre de l'article</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Contenu de l'article avec images
+                                            </div>
+                                            <div class="modal-footer">
+                                                tags ?? date?
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" id="headingFour">
+                            <h2 class="mb-0">
+                                <button class="btn btn-outline-success collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                    Articles 2017
+                                </button>
+                            </h2>
+                        </div>
+                        <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                            <div class="card-body">
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-link text-black-50" data-toggle="modal" data-target="#exampleModal">
+                                    Titre article
+                                </button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Titre de l'article</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Contenu de l'article avec images
+                                            </div>
+                                            <div class="modal-footer">
+                                                tags ?? date?
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" id="headingFive">
+                            <h2 class="mb-0">
+                                <button class="btn btn-outline-success collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                    Articles 2016
+                                </button>
+                            </h2>
+                        </div>
+                        <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+                            <div class="card-body">
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-link text-black-50" data-toggle="modal" data-target="#exampleModal">
+                                    Titre article
+                                </button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Titre de l'article</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Contenu de l'article avec images
+                                            </div>
+                                            <div class="modal-footer">
+                                                tags ?? date?
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </p>
+            </div>
+        </div>
+{% endblock %}
+
+{% block rightside %}
+  {{ include('form/_formContact.html.twig') }}
+{% endblock %}

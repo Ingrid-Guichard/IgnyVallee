@@ -1,0 +1,132 @@
+{{ form_start(form) }}
+
+    <div class="row ml-2">
+        <p>
+            Choix des listes de diffusion :
+        </p>
+    </div>
+
+    <div class="text-body">
+        {{ form_label(form.tous) }}
+        {{ form_widget(form.tous)}}
+    </div>
+
+    <div class="text-body">
+        {{ form_label(form.administrateurs) }}
+        {{ form_widget(form.administrateurs)}}
+    </div>
+
+    <div class="text-body">
+        {{ form_label(form.referent) }}
+        {{ form_widget(form.referent)}}
+    </div>
+
+
+    <div class="row mt-3 adherentListeDiffusionHauteurLigne">
+      <div class="col-2">
+        <p class="text-body">
+          Adhérents :
+        </p>
+      </div>
+      <div class="text-body">
+          {{ form_label(form.adherentTous) }}
+          {{ form_widget(form.adherentTous)}}
+      </div>
+
+    </div>
+    <div class="row mb-3 adherentListeDiffusionHauteurLigne">
+      <div class="col-1">
+      </div>
+      <div class="col-2">
+        <p class="text-body">
+        Par activité :
+
+        </p>
+      </div>
+      <div class="text-body mr-3">
+          {{ form_label(form.adherentP) }}
+          {{ form_widget(form.adherentP)}}
+      </div>
+      <div class="text-body mr-3">
+          {{ form_label(form.adherentR) }}
+          {{ form_widget(form.adherentR)}}
+      </div>
+      <div class="text-body mr-3">
+          {{ form_label(form.adherentV) }}
+          {{ form_widget(form.adherentV)}}
+      </div>
+      <div class="text-body mr-3">
+          {{ form_label(form.adherentE) }}
+          {{ form_widget(form.adherentE)}}
+      </div>
+      <div class="text-body mr-3">
+          {{ form_label(form.adherentCom) }}
+          {{ form_widget(form.adherentCom)}}
+      </div>
+    </div>
+
+    <div class="row adherentListeDiffusionHauteurLigne">
+      <div class="col-1">
+      </div>
+      <div class="col-3">
+        <p class="text-body">
+          Par secteur d'intérêt :
+        </p>
+      </div>
+      <div class="text-body mr-3">
+          {{ form_label(form.adherentIntP) }}
+          {{ form_widget(form.adherentIntP)}}
+      </div>
+      <div class="text-body mr-3">
+          {{ form_label(form.adherentIntR) }}
+          {{ form_widget(form.adherentIntR)}}
+      </div>
+      <div class="text-body mr-3">
+          {{ form_label(form.adherentIntV) }}
+          {{ form_widget(form.adherentIntV)}}
+      </div>
+      <div class="text-body mr-3">
+          {{ form_label(form.adherentIntE) }}
+          {{ form_widget(form.adherentIntE)}}
+      </div>
+    </div>
+
+    <div class="row ml-1 mb-3 mt-2">
+      <div class="text-body">
+          {{ form_label(form.adherentArchive) }}
+          {{ form_widget(form.adherentArchive)}}
+      </div>
+    </div>
+
+    <div class="ml-4 mr-4">
+
+    {# Changement du label de l'attribut "annee"   #}
+    {{ form_label(form.annee,
+        "Filtrer par années") }}
+    {# Affichage de la zone à remplir du formulaire pour l'attribut "annee" #}
+    {{ form_widget(form.annee  ,{'attr': {
+        'placeholder': "Veuillez entrer une année",
+        'class': "mb-5"}}  )}}
+
+
+    {# Changement du label de l'attribut "object"   #}
+    {{ form_label(form.object,
+        "Objet") }}
+    {# Affichage de la zone à remplir du formulaire pour l'attribut "object" #}
+    {{ form_widget(form.object,{'attr': {
+        'class': "mb-2 mt-4"}} )}}
+
+    {# Changement du label de l'attribut "message"   #}
+    {{ form_label(form.message) }}
+    {# Affichage de la zone à remplir du formulaire pour l'attribut "message" #}
+    {{ form_widget(form.message,{'attr': {
+        'class': "mb-2 mt-1",
+        'rows': '6'}} )}}
+    </div>
+
+
+    <div class="button_Formulaire">
+        <button type="submit" class="btn btn-outline-success mb-3 mt-3">Envoyer</button>
+    </div>
+
+{{ form_end(form) }}

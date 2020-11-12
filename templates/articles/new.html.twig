@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un article - Igny Vallée Comestible{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <a href="{{ path('articles_index') }}">
+            <img src="{{ asset('build/images/return.svg') }}" class="button_return mt-3 ml-4" alt="Retour">
+        </a>
+    </div>
+
+    {#<form method="post" action="{{ path('upload_test') }}" enctype="multipart/form-data">
+        <input type="file" name="image">
+
+        <button type="submit" class="btn btn-light">Charger</button>
+    </form>
+
+    <hr>#}
+
+    <div class="formulaire">
+        <div class="card new_article border-danger">
+            <div class="card-header font-weight-bold text-danger">Publier un article</div>
+            <div class="card-body">
+                {# Début du formulaire #}
+                {{ form_start(form) }}
+
+                {# Affichage de la zone à remplir du formulaire pour l'attribut "titre" #}
+                <div class="form-group">
+                    {{ form_widget(form.titre, {'attr': {
+                        'class':'form-control',
+                        'placeholder':'Insérez le titre de l\'article...'}}) }}
+                </div>
+
+                {# Affichage de la zone à remplir du formulaire pour l'attribut "contenu" #}
+                <div class="form-group">
+                    {{ form_widget(form.contenu, {'attr': {
+                        'class':'form-control',
+                        'placeholder':'Contenu de l\'article...'}}) }}
+                </div>
+
+                {# Images de l'article #}
+                <div class="form-group">
+                    {{ form_row(form.imageName) }}
+                </div>
+
+                {# Changement du label de l'attribut "date" #}
+                {{ form_label (form.date, "Date de publication de l\'article") }}
+
+                {# Affichage des menus déroulants pour l'attribut "date" #}
+                {{ form_widget (form.date) }}
+
+
+                {{ form_widget(form) }}
+                <div class="row justify-content-center">
+                    <div class="col-auto">
+                        <button class="btn btn-danger" >{{ button_label|default('Enregistrer') }}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,43 @@
+<div class="card border-danger mt-0" style="max-width: 18rem;">
+    <div class="card-body">
+
+        {{ form_start(form) }}
+
+            {# Changement du label de l'attribut "nom"   #}
+            {{ form_label(form.nom,
+                "Nom") }}
+
+            {# Affichage de la zone à remplir du formulaire pour l'attribut "nom" #}
+            {{ form_widget(form.nom,{'attr': {
+                'placeholder': "ex : Dupont",
+                'class': "mb-2 mt-1"}} )}}
+
+            {# Changement du label de l'attribut "email"   #}
+            {{ form_label(form.email,
+                "Email") }}
+            {# Affichage de la zone à remplir du formulaire pour l'attribut "email" #}
+            {{ form_widget(form.email,{'attr': {
+                'placeholder': "ex : marie.dupont@gmail.com",
+                'class': "mb-2 mt-1"}} )}}
+
+            {# Changement du label de l'attribut "adresse"   #}
+            {{ form_label(form.message,
+                "Message") }}
+            {# Affichage de la zone à remplir du formulaire pour l'attribut "adresse" #}
+            {{ form_widget(form.message,{'attr': {
+                'class': "mb-2 mt-1",
+                'rows': '7'}} )}}
+
+            {# Changement du label de l'attribut "politiqueConfidentialite"   #}
+            {{ form_label(form.politiqueConfidentialite) }}
+            {# Affichage de la zone à remplir du formulaire pour l'attribut "politiqueConfidentialite" #}
+            {{ form_widget(form.politiqueConfidentialite)}}
+            <a href="{{path('app_politique_confidentialite')}}">Politique de confidentialité</a>
+
+            <div class="button_Formulaire">
+                <button type="submit" class="btn btn-outline-danger mb-3 mt-3">Valider</button>
+            </div>
+
+        {{ form_end(form) }}
+    </div>
+</div>

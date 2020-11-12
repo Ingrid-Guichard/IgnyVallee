@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des tâches{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="col-6">
+        <a href="{{ path('event_calendar') }}">
+            <img src="{{ asset('/build/images/return.svg') }}" class="button_return mt-3 ml-4"  alt="Retour"
+                 width="50px" height="50px">
+        </a>
+    </div>
+    <h1 class="mt-2"> Liste des taches </h1>
+    <table class="table table-responsive">
+        <div class ="row align-items-center">
+            <thead>
+            <tr>
+                <th>Tâche</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+        </div>
+        <tbody>
+            {% for tach in taches %}
+                <tr>
+                    <td>{{ tach.nom }}</td>
+                    <td>{{ tach.description }}</td>
+                    <td>
+                        {% if is_granted('ROLE_REFERENT') %}
+                        <form method="post" action="{{ path('taches_delete', {'id': tach.id}) }}" onsubmit="return confirm('Etes-vous sûr de vouloir supprimer cette tâche ?');">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ tach.id) }}">
+                            <button class="btn btn-sm" >
+                                <img src="{{ asset('/build/images/supprimer.svg') }}" class="button_atelier_index"  alt="Supprimer">
+                            </button>
+                            <a href="{{ path('taches_edit', {'id': tach.id}) }}">
+                                <img src="{{ asset('/build/images/edit.svg') }}" class="button_atelier_index ml-1 "  alt="Modifier">
+                            </a>
+                        </form>
+                        {% endif %}
+                    </td>
+                </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">Pas de tâches à afficher</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {% if is_granted('ROLE_REFERENT') %}
+        <a href="{{ path('taches_new') }}"  class="btn btn-success mb-3 mt-3" id="button_creerAtelier">Créer nouvelle tâche</a>
+    {% endif %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,68 @@
+{{ form_start(form) }}
+    <div class="filters card text-black bg-light mt-0"> <!--pour la bordure du conteneur-->
+        <div class="card-header">Filtres</div>
+        <div class="card-body">
+
+            <!-- choix sous forme de check box permet de choisir les types d'adhérents-->
+            <div class="role-adherent ">
+                <span class="badge badge-pill badge-dark">Filtrer par rôle</span></br></br>
+                <div class="form-check">
+                    {{ form_label(form.admins) }}
+                    {{ form_widget(form.admins)}}
+                    {{ form_label(form.referentsP) }}
+                    {{ form_widget(form.referentsP)}}
+                    {{ form_label(form.referentsR) }}
+                    {{ form_widget(form.referentsR)}}
+                    {{ form_label(form.referentsV) }}
+                    {{ form_widget(form.referentsV)}}
+                    {{ form_label(form.membresP) }}
+                    {{ form_widget(form.membresP)}}
+                    {{ form_label(form.membresR) }}
+                    {{ form_widget(form.membresR)}}
+                    {{ form_label(form.membresV) }}
+                    {{ form_widget(form.membresV)}}
+                    {{ form_label(form.membresA) }}
+                    {{ form_widget(form.membresA)}}
+                    {{ form_label(form.membresPr) }}
+                    {{ form_widget(form.membresPr)}}
+                    {{ form_label(form.intsP) }}
+                    {{ form_widget(form.intsP)}}
+                    {{ form_label(form.intsR) }}
+                    {{ form_widget(form.intsR)}}
+                    {{ form_label(form.intsV) }}
+                    {{ form_widget(form.intsV)}}
+                    {{ form_label(form.intsA) }}
+                    {{ form_widget(form.intsA)}}
+                    {{ form_label(form.archives) }}
+                    {{ form_widget(form.archives)}}
+                </div>
+                </br>
+            </div>
+
+            <div class="annee-adherent">
+                <span class="badge badge-pill badge-dark">Rechercher par année de cotisation</span></br></br>
+                <div class="form-group">
+                    {{ form_widget(form.anneeCotis,{'attr': {
+                        'placeholder': "Entrer l'année"}}
+                    ) }}
+                </div>
+            </div>
+
+            <!-- filtre pour la recherche par nom d'un adhérent qu'importe son rôle -->
+            <div class="nom-adherent">
+                <span class="badge badge-pill badge-dark">Rechercher par nom</span></br></br>
+                <div class="form-group">
+                    {{ form_widget(form.nom,{'attr': {
+                        'placeholder': "Entrer le nom"}}
+                    ) }}
+                    {{ form_widget(form.prenom,{'attr': {
+                        'placeholder': "Entrer le prénom"}}
+                    ) }}
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-success button_filtre">Valider</button>
+
+        </div>
+    </div>
+{{ form_end(form) }}

@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier tâche {% endblock %}
+
+{% block content %}
+
+    <div class="formulaire mr-4 ml-4">
+        <div class="card border-danger mb-3 mt-5" >
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-4">
+                        <a href="{{ path('taches_index') }}">
+                            <img src="{{ asset('/build/images/return.svg') }}" class="button_return mt-3 ml-4"  alt="Retour"
+                                 width="50px" height="50px">
+                        </a>
+                    </div>
+                    <div class="col-4">
+                        <h1 class="mt-2"> Edition d'une tâche </h1>
+                    </div>
+                    <div class="col-4">
+                        {{ include('taches/_delete_form.html.twig') }}
+                    </div>
+                </div>
+            </div>
+            <div class="card-body text-danger">
+
+                {# Début du formulaire #}
+                {{ form_start(form) }}
+
+                {# Changement du label de l'attribut "nom"   #}
+                {{ form_label(form.nom,
+                    "Titre de la tâche") }}
+                {# Affichage de la zone à remplir du formulaire pour l'attribut "nom" #}
+                {{ form_widget(form.nom,{'attr': {
+                    'placeholder': "ex : Coupe d'arbre",
+                    'class': "mb-2 mt-1"}} )}}
+
+                {{ form_label(form.description,
+                    "Description") }}
+                {{ form_widget(form.description,{'attr': {
+                    'class': "mb-2 mt-1"}} )}}
+
+                <div class="button_Formulaire">
+                    <button type="submit" class="btn btn-outline-success mb-4 mt-3">Modifier</button>
+                </div>
+
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

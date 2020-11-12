@@ -1,0 +1,7 @@
+<form method="post" action="{{ path('events_delete', {'id': event.id}) }}" onsubmit="return confirm('Etes-vous sûr de vouloir supprimer cet évènement ?');">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ event.id) }}">
+    <button class="btn button_supp_event mt-2 mr-3" >
+        <img src="{{ asset('/build/images/supprimer.svg') }}" class="button_supp"  alt="Retour">
+    </button>
+</form>

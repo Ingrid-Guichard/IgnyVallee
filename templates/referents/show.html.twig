@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Referents{% endblock %}
+
+{% block body %}
+    <h1>Referents</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ referent.id }}</td>
+            </tr>
+            <tr>
+                <th>HeuresGestionReferent</th>
+                <td>{{ referent.heuresGestionReferent }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('referents_index') }}">back to list</a>
+
+    <a href="{{ path('referents_edit', {'id': referent.id}) }}">edit</a>
+
+    {{ include('referents/_delete_form.html.twig') }}
+{% endblock %}

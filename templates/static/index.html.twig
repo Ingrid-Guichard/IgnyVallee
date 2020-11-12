@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil - Igny Vallée Comestible{% endblock %}
+
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="row align-items-center">
+            <div class="alert alert-danger" role="alert">
+                <h4 class="alert-heading">Bienvenue dans le site d'Igny Vallée Comestible!</h4>
+                <p>Naviguez à travers notre page pour découvrir notre association...</p>
+                <hr>
+                <p class="mb-0">Cet outil vous permettra de vous inscrire à des évènements et des ateliers, adhérer à des activités, suivre la vie des ruchers, du verger et du potager de l'association, ou même adopter un pommier et gérer son entretien!</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block rightside %}
+  {{ include('form/_formContact.html.twig') }}
+{% endblock %}

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>{% block title %}Page d'accueil -Igny Vallée Comestible{% endblock %}</title>
+
+    {% block stylesheets %}
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Spartan&display=swap">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+              integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+        {{ encore_entry_link_tags('app') }}
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.1.0/main.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@4.1.0/main.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@4.1.0/main.min.css">
+    {% endblock %}
+</head>
+<body>
+
+{% block imageheader %}
+    <!-- Header -->
+    <div class="container-fluid text-center logo">
+        <img class="w-50 h-15 text-right" src="{{ asset('/build/images/logo.png') }}" alt="logo">
+    </div>
+
+{% endblock %}
+
+{% block header %}
+    <header class="sticky-top">
+        {{ include('fragments/_navBar.html.twig') }}
+    </header>
+{% endblock %}
+
+
+{# #}
+
+{% block body %}
+<div class="container-fluid main-content" id="main-content" >
+        <div class="row">
+        <div class="col-6 order-2 col-md-2 order-md-1 side mt-5">
+            {% block leftside %}
+                {{ include('fragments/_lastEvents.html.twig') }}
+            {% endblock %}
+        </div> 
+        <div class="col-12 order-1 col-md-8 order-md-2 bg-light mt-5 content">
+            {% block content %}
+            {% endblock %}
+        </div>
+        <div class="col-6 order-3 col-md-2 order-md-3 side mt-5">
+            {% block rightside %}
+                {{ include('fragments/_lastAteliers.html.twig') }}
+            {% endblock %}
+        </div> 
+    </div>
+</div>
+{% endblock %}
+
+<footer>
+    {% block footer %}
+        <div class="footer sticky-bottom">
+            <div class="footer-content">
+
+                <div class="footer-section about">
+                    <h3> Nous contacter </h3>
+                    <div class="borders"></div>
+                    <br>
+
+                    <div class="contact">
+                        <span><i class="fas fa-envelope"></i> &nbsp; ignyvalleecomestible@gmail.com</span>
+                    </div>
+
+
+                    <div class="socials">
+                        <a href="https://www.facebook.com/groups/collectifignysaintnicolas/"><i class="fab fa-facebook"></i></a>
+                    </div>
+
+                </div>
+
+                <div class="footer-section links">
+                    <h3> Liens utiles </h3>
+                    <div class="borders"></div>
+
+                    <!-- mettre les liens vers les bonnes pages et les bon noms !-->
+                    <div class="liens">
+                    <ul>
+                        <a href="{{ path('app_plan_site') }}"><li>Plan du site</li></a>
+                        <a href="{{ path('app_politique_confidentialite') }}"><li>Politique de confidentialité</li></a>
+                        <a href="{{ path('app_politique_cookies') }}"><li>Politique des cookies</li></a>
+                        <a href="{{ path('app_mentions_legales') }}"><li>Mentions légales</li></a>
+                    </ul>
+                    </div>
+                 </div>
+
+                 <div class="footer-section place">
+                    <h3> Nous trouver </h3>
+                    <div class="borders"></div>
+                    <br>
+                    <br>
+
+                    <div class="lieux">
+                        <span><i class="fas fa-map-marker-alt"></i> &nbsp; 20, chemin Des Fraises, 91430 Igny</span>
+                    </div>
+
+                 </div>
+
+                </div>
+
+            </div>
+
+</div>
+
+    {% endblock %}
+</footer>
+
+{% block javascripts %}
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.1.0/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@4.1.0/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@4.1.0/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@4.1.0/main.min.js"></script>
+    {{ encore_entry_script_tags('app') }}
+
+
+
+    <script type="text/javascript">
+
+        document.addEventListener('DOMContentLoaded', () => {
+            var calendarEl = document.getElementById('calendar-holder');
+
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+
+                plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list' ],
+                defaultView: 'dayGridMonth',
+                editable: true,
+                eventSources: [
+                    {
+                        url: "{{ path('fc_load_events') }}",
+                        method: "POST",
+                        extraParams: {
+                            filters: JSON.stringify({})
+                        },
+                        failure: () => {
+                            // alert("There was an error while fetching FullCalendar!");
+                        },
+                    },
+                ],
+                header: {
+                    left: 'prev,next today ',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay',
+
+
+                },
+                locale: 'fr',
+
+                 // https://fullcalendar.io/docs/plugin-index
+                timeZone: 'UTC',
+
+            });
+
+
+
+            calendar.render();
+        });
+    </script>
+
+
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,205 @@
+{{ form_start(form) }}
+
+    {# Changement du label de l'attribut "nom"   #}
+    {{ form_label(form.nom,
+        "Nom de l'adhérent") }}
+    {# Affichage de la zone à remplir du formulaire pour l'attribut "nom" #}
+    {{ form_widget(form.nom,{'attr': {
+        'placeholder': "ex : Dupont",
+        'class': "mb-2 mt-1"}} )}}
+
+    {# Changement du label de l'attribut "prenom"   #}
+    {{ form_label(form.prenom,
+        "Prénom de l'adhérent") }}
+    {# Affichage de la zone à remplir du formulaire pour l'attribut "prenom" #}
+    {{ form_widget(form.prenom,{'attr': {
+        'placeholder': "ex : Marie",
+        'class': "mb-2 mt-1"}} )}}
+
+    {# Changement du label de l'attribut "email"   #}
+    {{ form_label(form.email,
+        "Email de l'adhérent") }}
+    {# Affichage de la zone à remplir du formulaire pour l'attribut "prenom" #}
+    {{ form_widget(form.email,{'attr': {
+        'placeholder': "ex : marie.dupont@gmail.com",
+        'class': "mb-2 mt-1"}} )}}
+
+    {# Changement du label de l'attribut "adresse"   #}
+    {{ form_label(form.adresse,
+        "Adresse de l'adhérent") }}
+    {# Affichage de la zone à remplir du formulaire pour l'attribut "adresse" #}
+    {{ form_widget(form.adresse,{'attr': {
+        'placeholder': "ex : 20 chemin des fraises, 91430 Igny ",
+        'class': "mb-2 mt-1"}} )}}
+
+    {# Changement du label de l'attribut "telephone"   #}
+    {{ form_label(form.telephone,
+        "Téléphone de l'adhérent") }}
+    {# Affichage de la zone à remplir du formulaire pour l'attribut "telephone" #}
+    {{ form_widget(form.telephone,{'attr': {
+        'placeholder': "ex : 0601020304",
+        'class': "mb-2 mt-1"}} )}}
+
+    <div class="row justify-content-center">
+        <div class="col-6">
+            {{ form_label(form.debutAdhesion,
+                "Début de l'adhésion") }}
+            {{ form_widget(form.debutAdhesion,{'attr': {
+                'class': "mb-2 mt-1"}} )}}
+        </div>
+
+        <div class="col-6">
+            {{ form_label(form.finAdhesion,
+                "Fin de l'adhésion") }}
+            {{ form_widget(form.finAdhesion,{'attr': {
+                'class': "mb-4 mt-1"}} )}}
+        </div>
+    </div>
+
+    <div class="row ml-2">
+        <p>
+            Choix des activités :
+        </p>
+    </div>
+
+    <div class="row justify-content-center mb-3">
+        <div class="col-2 text-center text-body">
+            {{ form_label(form.isActPotager) }}
+            {{ form_widget(form.isActPotager)}}
+        </div>
+
+        <div class="col-2 text-center text-body">
+            {{ form_label(form.isActVerger) }}
+            {{ form_widget(form.isActVerger)}}
+        </div>
+
+        <div class="col-2 text-center text-body">
+            {{ form_label(form.isActRucher) }}
+            {{ form_widget(form.isActRucher)}}
+        </div>
+
+        <div class="col-2 text-center text-body">
+            {{ form_label(form.isActAnimation) }}
+            {{ form_widget(form.isActAnimation)}}
+        </div>
+
+        <div class="col-2 text-center text-body">
+            {{ form_label(form.isActPromotion) }}
+            {{ form_widget(form.isActPromotion)}}
+        </div>
+    </div>
+
+    <div class="row ml-2">
+        <p>
+            Pour quelle activité souhaitez-vous recevoir des informations ?
+        </p>
+    </div>
+
+    <div class="row justify-content-center mb-3 text-body">
+        <div class="col-2 text-center">
+            {{ form_label(form.isIntPotager) }}
+            {{ form_widget(form.isIntPotager)}}
+        </div>
+
+        <div class="col-2 text-center text-body">
+            {{ form_label(form.isIntVerger) }}
+            {{ form_widget(form.isIntVerger)}}
+        </div>
+
+        <div class="col-2 text-center text-body">
+            {{ form_label(form.isIntRucher) }}
+            {{ form_widget(form.isIntRucher)}}
+        </div>
+
+        <div class="col-2 text-center text-body">
+            {{ form_label(form.isIntAnimation) }}
+            {{ form_widget(form.isIntAnimation)}}
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-5">
+            {{ form_label(form.isPayed,
+                "L'adhérent a-t-il payé sa cotisation ?") }}
+        </div>
+
+        <div class="col-1 text-center text-body">
+            {{ form_widget(form.isPayed,{'attr': {
+                'class': "mb-2 mt-1"}} )}}
+        </div>
+    </div>
+
+    {# Changement du label de l'attribut "typePaiement"   #}
+            {{ form_label(form.typePaiement,
+                "Type de paiement") }}
+            {# Affichage de la zone à remplir du formulaire pour l'attribut "typePaiement" #}
+            {{ form_widget(form.typePaiement,{'attr': {
+                'class': "mb-2 mt-1"}} )}}
+
+            {# Changement du label de l'attribut "typeAdhesion"   #}
+            {{ form_label(form.typeAdhesion,
+                "Type de l'adhésion") }}
+            {# Affichage de la zone à remplir du formulaire pour l'attribut "prixAdhesion" #}
+            {{ form_widget(form.typeAdhesion)}}
+
+    <div class="row mt-4">
+        <div class="col-5">
+            {{ form_label(form.isArchive,
+                "Souhaitez-vous archiver l'adhérent ?") }}
+        </div>
+
+        <div class="col-1 text-center text-body">
+            {{ form_widget(form.isArchive,{'attr': {
+                'class': "mb-2 mt-1"}} )}}
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-5">
+            Gestion des droits :
+        </div>
+    </div>
+
+    <div class="row ml-2 mt-4">
+        <p>
+            <div class="col-5">
+                {{ form_label(form.isAdmin,
+                    "Lui donner les droits administrateurs ?") }}
+            </div>
+
+            <div class="col-1 text-center text-body">
+                {{ form_widget(form.isAdmin,{'attr': {
+                    'class': "mb-2 mt-1"}} )}}
+            </div>
+        </p>
+    </div>
+
+    <div class="row ml-2">
+        <p>
+                <div class="col-5">
+                    L'adhérent est-il référent ?
+                </div>
+
+        <div class="row justify-content-center mb-3 text-body">
+
+                <div class="col-4 text-center text-body">
+                    {{ form_widget(form.isReferentP) }}
+                </div>
+
+                <div class="col-4 text-center text-body">
+                    {{ form_widget(form.isReferentR) }}
+                </div>
+
+                <div class="col-4 text-center text-body">
+                    {{ form_widget(form.isReferentV) }}
+                </div>
+
+        </div>
+        </p>
+    </div>
+
+    <div class="button_Formulaire">
+        <button type="submit" class="btn btn-outline-success mb-3 mt-3">Modifier</button>
+    </div>
+
+{{ form_end(form) }}

@@ -1,0 +1,209 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fiche de visite - IgnyValleeComestible{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-10 mt-2">
+            <a href="{{ path('fiches_de_visite_index') }}">
+                <img src="{{ asset('build/images/return.svg') }}" class="button_return" alt="Retour">
+            </a>
+        </div>
+        <div class="col-1 mt-2">
+           {% if is_granted ('ROLE_REFERENT') %}
+            <a href="{{ path('fiches_de_visite_edit', {'id': fiches_de_visite.id}) }}">
+                <img src="{{ asset('build/images/edit.svg') }}" class="button_edit" alt="Modifier">
+            </a>
+            {% endif %}
+        </div>
+
+        <div class="col-1 pb-3 mt-0">
+            {% if is_granted ('ROLE_REFERENT') %}
+            {{ include('fiches_de_visite/_delete_form.html.twig') }}
+            {% endif %}
+        </div>
+    </div>
+
+<div class="card new_article border-danger">
+    <div class="card-header font-weight-bold text-danger">Fiche de visite du {{ fiches_de_visite.dateVisite ? fiches_de_visite.dateVisite|date('d-m-Y') : '' }}</div>
+    <table class="table mt-4">
+        <tbody>
+            <tr>
+                <th>Nom du visiteur</th>
+                <td>{{ fiches_de_visite.adherent.nom }}</td>
+            </tr>
+            <tr>
+                <th>Type de visite</th>
+                <td>{{ fiches_de_visite.typeVisite }}</td>
+            </tr>
+            <tr>
+                <th>Durée de la visite</th>
+                <td>
+                {% if fiches_de_visite.tempsVisite %}
+                    {{ fiches_de_visite.tempsVisite }} minutes
+                {% endif %}
+                </td>
+            </tr>
+            {#<tr>
+                <th>Naissance de la reine</th>
+                <td>{{ fiches_de_visite.ruche.naissanceReine }}</td>
+            </tr>#}
+        </tbody>
+    </table>
+
+    <div class="row p-4"></div>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Objectifs de la visite</th>
+                <th>Observations générales</th>
+            </tr>
+            <tr>
+                <td>{{ fiches_de_visite.objectifs }}</td>
+                <td>{{ fiches_de_visite.observations }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="row p-4"></div>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Poids de la ruche</th>
+                <td>
+                    {% if fiches_de_visite.poidsRuche %}
+                    {{fiches_de_visite.poidsRuche}} kg
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>Taux d'aggressivité des abeilles</th>
+                <td>{{ fiches_de_visite.tauxAgressiviteAbeilles }}</td>
+            </tr>
+            <tr>
+                <th>Nourrissement</th>
+                <td>
+                    {% if fiches_de_visite.nourrissement %}
+                    {{ fiches_de_visite.nourrissement }} L de {{ fiches_de_visite.typeSirop }}
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>Comptage Varroa</th>
+                <td>{{ fiches_de_visite.calculVarroa }}</td>
+            </tr>
+            <tr>
+                <th>Nombre d'abeilles</th>
+                <td>{{ fiches_de_visite.quantiteAbeilles }}</td>
+            </tr>
+            <tr>
+                <th>Détection de la reine</th>
+                <td>{{ fiches_de_visite.detectionReine }}</td>
+            </tr>
+            <tr>
+                <th>Cellules royales</th>
+                <td>{{ fiches_de_visite.cellulesRoyales }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="row p-4"></div>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Cadre</th>
+                <th></th>
+                <th>Type de structure</th>
+            </tr>
+            <tr>
+                <td>n°1</td>
+                <td>{{ fiches_de_visite.cadre1 }}</td>
+                <td>{{ fiches_de_visite.typeStructure1 }}</td>
+            </tr>
+            <tr>
+                <td>n°2</td>
+                <td>{{ fiches_de_visite.cadre2 }}</td>
+                <td>{{ fiches_de_visite.typeStructure2 }}</td>
+            </tr>
+            <tr>
+                <td>n°3</td>
+                <td>{{ fiches_de_visite.cadre3 }}</td>
+                <td>{{ fiches_de_visite.typeStructure3 }}</td>
+            </tr>
+            <tr>
+                <td>n°4</td>
+                <td>{{ fiches_de_visite.cadre4 }}</td>
+                <td>{{ fiches_de_visite.typeStructure4 }}</td>
+            </tr>
+            <tr>
+                <td>n°5</td>
+                <td>{{ fiches_de_visite.cadre5 }}</td>
+                <td>{{ fiches_de_visite.typeStructure5 }}</td>
+            </tr>
+            <tr>
+                <td>n°6</td>
+                <td>{{ fiches_de_visite.cadre6 }}</td>
+                <td>{{ fiches_de_visite.typeStructure6 }}</td>
+            </tr>
+            <tr>
+                <td>n°7</td>
+                <td>{{ fiches_de_visite.cadre7 }}</td>
+                <td>{{ fiches_de_visite.typeStructure7 }}</td>
+            </tr>
+            <tr>
+                <td>n°8</td>
+                <td>{{ fiches_de_visite.cadre8 }}</td>
+                <td>{{ fiches_de_visite.typeStructure8 }}</td>
+            </tr>
+            <tr>
+                <td>n°9</td>
+                <td>{{ fiches_de_visite.cadre9 }}</td>
+                <td>{{ fiches_de_visite.typeStructure9 }}</td>
+            </tr>
+            <tr>
+                <td>n°10</td>
+                <td>{{ fiches_de_visite.cadre10 }}</td>
+                <td>{{ fiches_de_visite.typeStructure10 }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="row p-4"></div>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Nombre de cadres de couvain</th>
+                <th>Nombre de cadres de miel</th>
+                <th>Nombre de cadres de pollen</th>
+            </tr>
+            <tr>
+                <td>{{ fiches_de_visite.nbCadresCouvain }}</td>
+                <td>{{ fiches_de_visite.nbCadresMiel }}</td>
+                <td>{{ fiches_de_visite.nbCadresPollen }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="row p-4"></div>
+
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>Type(s) de couvain</th>
+            <th>Réserve de miel</th>
+            <th>Réserve de pollen</th>
+        </tr>
+        <tr>
+            <td>{{ fiches_de_visite.typeCouvain ? fiches_de_visite.typeCouvain|join(', ') : '' }}</td>
+            <td>{{ fiches_de_visite.reserveMiel }}</td>
+            <td>{{ fiches_de_visite.reservePollen }}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
