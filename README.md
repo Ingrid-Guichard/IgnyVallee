@@ -1,31 +1,18 @@
 # Igny Vallee Comestible
 
-Projet MIN 4A de refonte du site web de l'association de Igny vallée comestible
+Projet MIN 4A de refonte du site web de l'association de Igny vallée comestible. 
 Fonctionnalités techniques :
   
-  
- ### Language BackEnd : Php
+ ## Contexte du projet:
+ 
+ Projet réalisé en 2020 au cours de ma quatrième année qui correspond à ma première année en cursus informatique et numérique.  
+
+### Language BackEnd : Php
 - Framework Symfony v5.0.7
 
 ### Language FrontEnd : HTML/CSS/JS
 
 - Framework Bootstrap v4.4.1
-
-## Serveur VPS
-Serveur Epf :
-
-        Login / password : min / igny2020;
-        Connexion : ssh -l min -p 2243 min.epf.fr
-
-        URL : https://igny.min.epf.fr/ (redirigé vers le port 80 du serveur)
-
-### Comment se connecter avec Cygwin
-
-        ssh min@min.epf.fr -p 2243
-   ensuite rentrer le mdp : 
-        
-        igny2020;
-
 
  ## Installation du projet
     
@@ -34,6 +21,7 @@ Serveur Epf :
         yarn install
         
         symfony serve -d
+  - Il faut aussi se connecter au serveur VPS avec le mot de passe du serveur qui ne peut pas être divulgué ou via cygwin toujours avec un mdp privé. 
         
    ## Mettre à jour le build css et js du projet
    
@@ -67,3 +55,14 @@ Serveur Epf :
 ## Déployer la migration       
 
          php bin/console doctrine:migrations:migrate 
+         
+### Equipe : 
+ 
+ Ce projet à été réalisé par les étudiants suivants: 
+
+ - BOUEY Perrine
+ - CHARLET Solène
+ - DELLA SETA Raphaël
+ - DELPECHE Vincent
+ - GUICHARD Ingrid (moi-même)
+ - ORTEGA COLLADO Elena
